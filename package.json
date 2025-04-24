@@ -1,6 +1,6 @@
 {
-  "name": "timer-app",
-  "private": true,
+  "name": "interva",
+  "homepage": "https://github.com/chaosweasl/interva",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
