@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWindowMinimize } from "@fortawesome/free-regular-svg-icons";
-import { faX } from "@fortawesome/free-solid-svg-icons";
+import { X } from "lucide-react";
+import { Minus } from "lucide-react";
+import { Menu } from "lucide-react";
 
 export function Tab() {
   useEffect(() => {
@@ -27,25 +27,9 @@ export function Tab() {
   return (
     <div data-tauri-drag-region className="navbar bg-base-100 shadow-sm">
       <div data-tauri-drag-region className="navbar-start">
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {" "}
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />{" "}
-            </svg>
-          </div>
-        </div>
+        <button className="btn btn-ghost btn-circle">
+          <Menu />
+        </button>
       </div>
       <div data-tauri-drag-region className="navbar-center">
         <a data-tauri-drag-region className="text-xl">
@@ -54,10 +38,10 @@ export function Tab() {
       </div>
       <div data-tauri-drag-region className="navbar-end">
         <button className="btn btn-ghost btn-circle" id="titlebar-minimize">
-          <FontAwesomeIcon icon={faWindowMinimize} />
+          <Minus />
         </button>
         <button className="btn btn-ghost btn-circle" id="titlebar-close">
-          <FontAwesomeIcon icon={faX} />
+          <X />
         </button>
       </div>
     </div>
