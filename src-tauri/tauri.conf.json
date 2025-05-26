@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "interva",
-        "width": 300,
-        "height": 450,
+        "width": 350,
+        "height": 500,
         "resizable": false,
         "decorations": false
       }
