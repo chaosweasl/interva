@@ -1,6 +1,31 @@
 import { Minus, X } from "lucide-react";
+import { Window } from "@tauri-apps/api/window";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// when using `"withGlobalTauri": true`, you may use
+// const { getCurrentWindow } = window.__TAURI__.window;
 
 export default function Navbar() {
+  useEffect(() => {
+    const appWindow = Window.getCurrent();
+
+    const minimizeButton = document.getElementById("titlebar-minimize");
+    const closeButton = document.getElementById("titlebar-close");
+
+    const onMinimize = () => appWindow.minimize();
+    const onClose = () => appWindow.close();
+
+    if (minimizeButton) minimizeButton.addEventListener("click", onMinimize);
+    if (closeButton) closeButton.addEventListener("click", onClose);
+
+    return () => {
+      if (minimizeButton)
+        minimizeButton.removeEventListener("click", onMinimize);
+      if (closeButton) closeButton.removeEventListener("click", onClose);
+    };
+  }, []);
+
   return (
     <div
       data-tauri-drag-region
@@ -30,27 +55,27 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-25 p-2 shadow"
           >
             <li>
-              <a>Timer</a>
+              <Link to="/">Interva</Link>
             </li>
             <li>
-              <a>Themes</a>
+              <Link to="/themes">Themes</Link>
             </li>
             <li>
-              <a>About</a>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </div>
       </div>
       <div data-tauri-drag-region className="navbar-center">
-        <a data-tauri-drag-region className="select-none font-semibold text-xl">
+        <Link to="/" className="btn btn-ghost font-semibold text-xl">
           interva
-        </a>
+        </Link>
       </div>
-      <div className="navbar-end">
-        <button className="btn btn-ghost btn-circle">
+      <div data-tauri-drag-region className="navbar-end">
+        <button id="titlebar-minimize" className="btn btn-ghost btn-circle">
           <Minus />
         </button>
-        <button className="btn btn-ghost btn-circle">
+        <button id="titlebar-close" className="btn btn-ghost btn-circle">
           <X />
         </button>
       </div>

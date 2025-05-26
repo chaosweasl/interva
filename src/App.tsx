@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./pages/Homepage";
+import Home from "./pages/interva";
+import Themes from "./pages/themes";
+import About from "./pages/about";
 
 export default function App() {
   return (
@@ -11,6 +13,8 @@ export default function App() {
         {/* Add top padding equal to navbar height */}
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/themes" element={<Themes />} />
+          <Route path="/about" element={<About />} />
           {/* Add other routes here */}
         </Routes>
       </div>
