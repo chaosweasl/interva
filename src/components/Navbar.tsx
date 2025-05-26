@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <div
       data-tauri-drag-region
-      className="navbar bg-base-100 shadow-sm min-h-14"
+      className="fixed top-0 left-0 right-0 z-50 navbar bg-base-100 shadow-sm min-h-14"
     >
       <div data-tauri-drag-region className="navbar-start">
         <div className="dropdown">
