@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Homepage from "./pages/Homepage";
+import App from "./App";
+import Navbar from "./components/Navbar";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Homepage />
+    <Navbar />
+    <App />
   </React.StrictMode>
 );
