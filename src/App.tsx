@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/interva";
 import Themes from "./pages/themes";
 import About from "./pages/about";
+import Settings from "./pages/settings";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/themes" element={<Themes />} />
           <Route path="/about" element={<About />} />
+          <Route path="/settings" element={<Settings />} />
           {/* Add other routes here */}
         </Routes>
       </div>
