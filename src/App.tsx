@@ -8,9 +8,8 @@ export default function App() {
   return (
     <Router>
       <Navbar />
-      <div className="min-h-screen">
-        {" "}
-        {/* Add top padding equal to navbar height */}
+      <div>
+        {/* Add top padding equal to navbar height (idk if needed) */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/themes" element={<Themes />} />
