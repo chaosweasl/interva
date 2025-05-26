@@ -1,4 +1,4 @@
-import { Minus, X } from "lucide-react";
+import { Minus, Settings2, X } from "lucide-react";
 import { Window } from "@tauri-apps/api/window";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -63,8 +63,14 @@ export default function Navbar() {
             <li>
               <Link to="/about">About</Link>
             </li>
+            <li>
+              <Link to="/settings">Settings</Link>
+            </li>
           </ul>
         </div>
+        <Link to="/settings" className="btn btn-ghost btn-circle">
+          <Settings2 className="w-5 h-5" />
+        </Link>
       </div>
       <div data-tauri-drag-region className="navbar-center">
         <Link to="/" className="btn btn-ghost font-semibold text-xl">
