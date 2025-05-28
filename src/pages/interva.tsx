@@ -1,12 +1,26 @@
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useState } from "react";
+import { useRef } from "react";
+import React from "react";
 
 export default function interva() {
   const value = 100;
   const state = "FOCUS";
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audio, setAudio] = useState<HTMLAudioElement>(0 as any); // Placeholder for audio element, replace with actual audio logic
   const currentRound = 1;
   const totalRounds = 4;
+
+  const [showSlider, setShowSlider] = useState(false);
+  const timeoutRef = useRef<number | null>(null);
+
+  const handleMouseEnter = () => {
+    setShowSlider(true);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setShowSlider(false);
+    }, 10000); // 10 seconds
+  };
 
   function handlePlay() {
     setIsPlaying(!isPlaying);
@@ -77,15 +91,32 @@ export default function interva() {
             <h2 className="text-lg font-semibold">
               {currentRound}/{totalRounds}
             </h2>
-            <button
-              className="btn btn-ghost btn-md"
-              onClick={() => handleReset()}
-            >
-              Reset
+            <div className="tooltip tooltip-right" data-tip="Reset rounds">
+              <button
+                className="btn btn-ghost btn-sm"
+                onClick={() => handleReset()}
+              >
+                <h1 className="text-base">Reset</h1>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="mr-5 flex justify-center items-center gap-3">
+          <button className="btn btn-ghost btn-circle">
+            <SkipForward />
+          </button>
+          <div className="flex flex-col items-center">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              className="range range-xs range-primary rotate-[-90deg] w-32"
+            />
+            <button className="btn btn-ghost btn-circle">
+              {audio ? <Volume2 /> : <VolumeX />}
             </button>
           </div>
         </div>
-        <div className="mr-10">b</div>
       </div>
     </div>
   );
