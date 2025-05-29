@@ -1,5 +1,4 @@
 import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
-import React from "react";
 import {
   useInterva,
   FOCUS_TIME,
@@ -40,12 +39,12 @@ export default function interva() {
 
   return (
     <div className="flex flex-col justify-between items-center h-screen bg-base-100 overflow-hidden">
-      <div className="flex flex-col items-center mt-25">
+      <div className="flex flex-col items-center mt-20">
         <div className="relative w-56 h-56">
           <svg className="w-full h-full -rotate-90">
             {/* Background circle */}
             <circle
-              className="text-base-300"
+              className="text-primary-content"
               strokeWidth="3"
               stroke="currentColor"
               fill="transparent"
@@ -56,7 +55,7 @@ export default function interva() {
             {/* Progress circle */}
             <circle
               className="text-primary transition-all duration-500 ease-in-out"
-              strokeWidth="6"
+              strokeWidth="8"
               strokeLinecap="round"
               stroke="currentColor"
               fill="transparent"
