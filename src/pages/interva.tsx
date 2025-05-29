@@ -121,12 +121,17 @@ export default function interva() {
           </div>
         </div>
         <div className="mr-5 flex justify-center items-center gap-3">
-          <button
-            className="btn btn-ghost btn-circle"
-            onClick={() => handleSkip()}
+          <div
+            className="tooltip tooltip-top"
+            data-tip="Skips to the next round"
           >
-            <SkipForward />
-          </button>
+            <button
+              className="btn btn-ghost btn-circle"
+              onClick={() => handleSkip()}
+            >
+              <SkipForward />
+            </button>
+          </div>
           <div
             className="relative flex flex-col items-center"
             onMouseEnter={handleVolumeMouseEnter}

@@ -37,8 +37,8 @@ export function useInterva() {
     const vol = volume / 100;
     pauseSound.current.volume = vol;
     unpauseSound.current.volume = vol;
-    timerEndSound.current.volume = vol / 1.5;
-    resetSound.current.volume = vol / 6;
+    timerEndSound.current.volume = vol;
+    resetSound.current.volume = vol / 4;
     soundOnSound.current.volume = vol;
     focusOverSound.current.volume = vol;
     breakOverSound.current.volume = vol;
