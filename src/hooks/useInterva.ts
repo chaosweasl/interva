@@ -1,8 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 
+const VOLUME_STORAGE_KEY = "interva-volume";
+
 export function useInterva() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(100);
+  const [volume, setVolume] = useState(() => {
+    const savedVolume = localStorage.getItem(VOLUME_STORAGE_KEY);
+    return savedVolume ? parseInt(savedVolume, 10) : 100;
+  });
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const volumeTimeoutRef = useRef<number | null>(null);
 
@@ -19,6 +24,7 @@ export function useInterva() {
     timerEndSound.current.volume = vol;
     resetSound.current.volume = vol / 2; // divided because otherwise it's too loud
     soundOnSound.current.volume = vol;
+    localStorage.setItem(VOLUME_STORAGE_KEY, volume.toString());
   }, [volume]);
 
   function handleVolumeMouseEnter() {
