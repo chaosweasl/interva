@@ -41,19 +41,36 @@ export default function interva() {
   return (
     <div className="flex flex-col justify-between items-center h-screen bg-base-100 overflow-hidden">
       <div className="flex flex-col items-center mt-25">
-        <div
-          className="radial-progress text-primary"
-          style={
-            {
-              "--value": `${progressValue}`,
-              "--size": "13rem",
-              "--thickness": "0.5rem",
-            } as React.CSSProperties
-          }
-          role="progressbar"
-        >
-          <div className="justify-center items-center flex flex-col">
-            <div className="font-mono text-4xl">
+        <div className="relative w-56 h-56">
+          <svg className="w-full h-full -rotate-90">
+            {/* Background circle */}
+            <circle
+              className="text-base-300"
+              strokeWidth="3"
+              stroke="currentColor"
+              fill="transparent"
+              r="104"
+              cx="112"
+              cy="112"
+            />
+            {/* Progress circle */}
+            <circle
+              className="text-primary transition-all duration-500 ease-in-out"
+              strokeWidth="6"
+              strokeLinecap="round"
+              stroke="currentColor"
+              fill="transparent"
+              r="104"
+              cx="112"
+              cy="112"
+              strokeDasharray={`${2 * Math.PI * 104}`}
+              strokeDashoffset={`${
+                2 * Math.PI * 104 * (1 - progressValue / 100)
+              }`}
+            />
+          </svg>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[12rem] text-center">
+            <div className="font-mono text-4xl mb-1.5">
               {hours > 0 && (
                 <>
                   <span aria-live="polite">
@@ -70,7 +87,9 @@ export default function interva() {
                 {seconds.toString().padStart(2, "0")}
               </span>
             </div>
-            <span className="text-xl">{timerState.replace("_", " ")}</span>
+            <span className="text-xl font-medium">
+              {timerState.replace("_", " ")}
+            </span>
           </div>
         </div>
         <div className="mt-5">
