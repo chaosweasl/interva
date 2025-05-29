@@ -53,32 +53,23 @@ export default function interva() {
           role="progressbar"
         >
           <div className="justify-center items-center flex flex-col">
-            <span className="countdown font-mono text-4xl">
+            <div className="font-mono text-4xl">
               {hours > 0 && (
                 <>
-                  <span
-                    style={{ "--value": hours } as React.CSSProperties}
-                    aria-live="polite"
-                  >
+                  <span aria-live="polite">
                     {hours.toString().padStart(2, "0")}
                   </span>
                   :
                 </>
               )}
-              <span
-                style={{ "--value": minutes } as React.CSSProperties}
-                aria-live="polite"
-              >
+              <span aria-live="polite">
                 {minutes.toString().padStart(2, "0")}
               </span>
               :
-              <span
-                style={{ "--value": seconds } as React.CSSProperties}
-                aria-live="polite"
-              >
+              <span aria-live="polite">
                 {seconds.toString().padStart(2, "0")}
               </span>
-            </span>
+            </div>
             <span className="text-xl">{timerState.replace("_", " ")}</span>
           </div>
         </div>
