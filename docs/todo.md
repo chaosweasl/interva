@@ -5,6 +5,7 @@
 <!-- - implement timer logic -->
 
 - add new colors for when break vs long break vs focus
+- add a cooler sound when reaching the long break
 - polish frontend
 - double check that daisyUI colors are applied
 - learn how useEffect and useMemo works
