@@ -1,6 +1,7 @@
 import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
 import { useState } from "react";
 import { useRef } from "react";
+import { useEffect } from "react";
 import React from "react";
 
 export default function interva() {
@@ -10,10 +11,20 @@ export default function interva() {
   const [volume, setVolume] = useState(100);
   const currentRound = 1;
   const totalRounds = 4;
+  const pauseSound = useRef(new Audio("/pause.mp3"));
+  const unpauseSound = useRef(new Audio("/unpause.mp3"));
+  const timerEndSound = useRef(new Audio("/timerEnd.mp3"));
 
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const volumeTimeoutRef = useRef<number | null>(null);
   // hide immediately on mouse-leave:
+
+  useEffect(() => {
+    const vol = volume / 100; // Convert to 0–1
+    pauseSound.current.volume = vol;
+    unpauseSound.current.volume = vol;
+    timerEndSound.current.volume = vol;
+  }, [volume]);
 
   function handleVolumeMouseEnter() {
     // Show immediately
@@ -48,8 +59,23 @@ export default function interva() {
     }
   }
 
+  function handleSkip() {
+    timerEndSound.current.currentTime = 0.4;
+    timerEndSound.current.play();
+  }
+
   function handlePlay() {
-    setIsPlaying(!isPlaying);
+    setIsPlaying((prev) => {
+      const next = !prev;
+      if (next) {
+        unpauseSound.current.currentTime = 0;
+        unpauseSound.current.play();
+      } else {
+        pauseSound.current.currentTime = 0;
+        pauseSound.current.play();
+      }
+      return next;
+    });
   }
 
   function handleReset() {
@@ -128,7 +154,10 @@ export default function interva() {
           </div>
         </div>
         <div className="mr-5 flex justify-center items-center gap-3">
-          <button className="btn btn-ghost btn-circle">
+          <button
+            className="btn btn-ghost btn-circle"
+            onClick={() => handleSkip()}
+          >
             <SkipForward />
           </button>
           <div
