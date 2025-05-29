@@ -7,7 +7,6 @@ export default function interva() {
   const state = "FOCUS";
   const currentRound = 1;
   const totalRounds = 4;
-
   const {
     isPlaying,
     volume,
@@ -15,10 +14,10 @@ export default function interva() {
     handleVolumeMouseEnter,
     handleVolumeMouseLeave,
     handleVolumeClick,
+    handleVolumeChange,
     handleSkip,
     handlePlay,
     handleReset,
-    setVolume,
   } = useInterva();
 
   return (
@@ -109,7 +108,7 @@ export default function interva() {
                 min="0"
                 max="100"
                 value={volume}
-                onChange={(e) => setVolume(+e.target.value)}
+                onChange={handleVolumeChange}
                 className="absolute bottom-full mb-15 range range-xs range-primary rotate-[-90deg] w-32"
               />
             )}

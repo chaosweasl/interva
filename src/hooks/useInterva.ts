@@ -18,11 +18,12 @@ export function useInterva() {
   const soundOnSound = useRef(new Audio("/sounds/soundOn.mp3"));
 
   useEffect(() => {
+    // side note: some audios were too loud, so I divided the volume
     const vol = volume / 100;
     pauseSound.current.volume = vol;
     unpauseSound.current.volume = vol;
-    timerEndSound.current.volume = vol;
-    resetSound.current.volume = vol / 2; // divided because otherwise it's too loud
+    timerEndSound.current.volume = vol / 1.5;
+    resetSound.current.volume = vol / 6;
     soundOnSound.current.volume = vol;
     localStorage.setItem(VOLUME_STORAGE_KEY, volume.toString());
   }, [volume]);
@@ -81,6 +82,12 @@ export function useInterva() {
     // Reset logic can be added here
   }
 
+  function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setVolume(+e.target.value);
+    soundOnSound.current.currentTime = 0;
+    soundOnSound.current.play();
+  }
+
   return {
     isPlaying,
     volume,
@@ -88,9 +95,9 @@ export function useInterva() {
     handleVolumeMouseEnter,
     handleVolumeMouseLeave,
     handleVolumeClick,
+    handleVolumeChange,
     handleSkip,
     handlePlay,
     handleReset,
-    setVolume,
   };
 }
