@@ -7,20 +7,46 @@ export default function interva() {
   const value = 100;
   const state = "FOCUS";
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio, setAudio] = useState<HTMLAudioElement>(0 as any); // Placeholder for audio element, replace with actual audio logic
+  const [volume, setVolume] = useState(100);
   const currentRound = 1;
   const totalRounds = 4;
 
-  const [showSlider, setShowSlider] = useState(false);
-  const timeoutRef = useRef<number | null>(null);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const volumeTimeoutRef = useRef<number | null>(null);
+  // hide immediately on mouse-leave:
 
-  const handleMouseEnter = () => {
-    setShowSlider(true);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setShowSlider(false);
-    }, 10000); // 10 seconds
-  };
+  function handleVolumeMouseEnter() {
+    // Show immediately
+    setShowVolumeSlider(true);
+    // Stop any pending hide
+    if (volumeTimeoutRef.current) {
+      clearTimeout(volumeTimeoutRef.current);
+      volumeTimeoutRef.current = null;
+    }
+  }
+
+  function handleVolumeMouseLeave() {
+    // show slider immediately
+    setShowVolumeSlider(true);
+
+    // clear any existing timeout
+    if (volumeTimeoutRef.current) {
+      clearTimeout(volumeTimeoutRef.current);
+    }
+
+    // hide after 10 seconds
+    volumeTimeoutRef.current = window.setTimeout(() => {
+      setShowVolumeSlider(false);
+    }, 500);
+  }
+
+  function handleVolumeClick() {
+    if (volume === 0) {
+      setVolume(100);
+    } else {
+      setVolume(0);
+    }
+  }
 
   function handlePlay() {
     setIsPlaying(!isPlaying);
@@ -105,15 +131,26 @@ export default function interva() {
           <button className="btn btn-ghost btn-circle">
             <SkipForward />
           </button>
-          <div className="flex flex-col items-center">
-            <input
-              type="range"
-              min="0"
-              max="100"
-              className="range range-xs range-primary rotate-[-90deg] w-32"
-            />
-            <button className="btn btn-ghost btn-circle">
-              {audio ? <Volume2 /> : <VolumeX />}
+          <div
+            className="relative flex flex-col items-center"
+            onMouseEnter={handleVolumeMouseEnter}
+            onMouseLeave={handleVolumeMouseLeave}
+          >
+            {showVolumeSlider && (
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={(e) => setVolume(+e.target.value)}
+                className="absolute bottom-full mb-15 range range-xs range-primary rotate-[-90deg] w-32"
+              />
+            )}
+            <button
+              className="btn btn-ghost btn-circle"
+              onClick={() => handleVolumeClick()}
+            >
+              {volume ? <Volume2 /> : <VolumeX />}
             </button>
           </div>
         </div>
