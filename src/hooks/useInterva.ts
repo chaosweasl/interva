@@ -73,6 +73,7 @@ export function useInterva() {
     setIsPlaying(false);
 
     if (timerState === "FOCUS") {
+      focusOverSound.current.currentTime = 0;
       focusOverSound.current.play();
       if (currentRound === ROUNDS_BEFORE_LONG_BREAK) {
         setTimerState("LONG_BREAK");
@@ -82,6 +83,7 @@ export function useInterva() {
         setTimeLeft(SHORT_BREAK * 60);
       }
     } else {
+      breakOverSound.current.currentTime = 0;
       breakOverSound.current.play();
       if (timerState === "LONG_BREAK") {
         setCurrentRound(1);
