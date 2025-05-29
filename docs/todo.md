@@ -1,6 +1,7 @@
 ## interva
 
-- add pause, play and reset buttons
+<!-- - add pause, play and reset buttons -->
+
 - polish frontend
 - double check that daisyUI colors are applied
 - learn how useEffect and useMemo works
