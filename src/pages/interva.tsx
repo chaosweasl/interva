@@ -1,16 +1,23 @@
 import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
 import React from "react";
-import { useInterva } from "../hooks/useInterva";
+import {
+  useInterva,
+  FOCUS_TIME,
+  SHORT_BREAK,
+  LONG_BREAK,
+} from "../hooks/useInterva";
 
 export default function interva() {
-  const value = 100;
-  const state = "FOCUS";
-  const currentRound = 1;
-  const totalRounds = 4;
   const {
     isPlaying,
     volume,
     showVolumeSlider,
+    currentRound,
+    totalRounds,
+    timerState,
+    hours,
+    minutes,
+    seconds,
     handleVolumeMouseEnter,
     handleVolumeMouseLeave,
     handleVolumeClick,
@@ -19,6 +26,17 @@ export default function interva() {
     handlePlay,
     handleReset,
   } = useInterva();
+  // Calculate total seconds based on hours, minutes, and seconds
+  const currentTotalSeconds = hours * 3600 + minutes * 60 + seconds;
+  const totalSeconds =
+    timerState === "FOCUS"
+      ? FOCUS_TIME * 60
+      : timerState === "SHORT_BREAK"
+      ? SHORT_BREAK * 60
+      : LONG_BREAK * 60;
+
+  // Calculate progress (100 means full, 0 means empty)
+  const progressValue = (currentTotalSeconds / totalSeconds) * 100;
 
   return (
     <div className="flex flex-col justify-between items-center h-screen bg-base-100 overflow-hidden">
@@ -27,7 +45,7 @@ export default function interva() {
           className="radial-progress text-primary"
           style={
             {
-              "--value": `${value}`,
+              "--value": `${progressValue}`,
               "--size": "13rem",
               "--thickness": "0.5rem",
             } as React.CSSProperties
@@ -35,30 +53,33 @@ export default function interva() {
           role="progressbar"
         >
           <div className="justify-center items-center flex flex-col">
-            {/* For TSX uncomment the commented types below */}
             <span className="countdown font-mono text-4xl">
+              {hours > 0 && (
+                <>
+                  <span
+                    style={{ "--value": hours } as React.CSSProperties}
+                    aria-live="polite"
+                  >
+                    {hours.toString().padStart(2, "0")}
+                  </span>
+                  :
+                </>
+              )}
               <span
-                style={{ "--value": 10 } as React.CSSProperties}
+                style={{ "--value": minutes } as React.CSSProperties}
                 aria-live="polite"
               >
-                10
+                {minutes.toString().padStart(2, "0")}
               </span>
               :
               <span
-                style={{ "--value": 24 } as React.CSSProperties}
+                style={{ "--value": seconds } as React.CSSProperties}
                 aria-live="polite"
               >
-                24
-              </span>
-              :
-              <span
-                style={{ "--value": 59 } as React.CSSProperties}
-                aria-live="polite"
-              >
-                59
+                {seconds.toString().padStart(2, "0")}
               </span>
             </span>
-            <span className="text-xl">{state}</span>
+            <span className="text-xl">{timerState.replace("_", " ")}</span>
           </div>
         </div>
         <div className="mt-5">
