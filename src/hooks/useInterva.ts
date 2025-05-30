@@ -73,7 +73,7 @@ export function useInterva() {
     setIsPlaying(false);
 
     if (timerState === "FOCUS") {
-      focusOverSound.current.currentTime = 0;
+      focusOverSound.current.currentTime = 0.2;
       focusOverSound.current.play();
       if (currentRound === ROUNDS_BEFORE_LONG_BREAK) {
         setTimerState("LONG_BREAK");
@@ -83,7 +83,7 @@ export function useInterva() {
         setTimeLeft(SHORT_BREAK * 60);
       }
     } else {
-      breakOverSound.current.currentTime = 0;
+      breakOverSound.current.currentTime = 0.1;
       breakOverSound.current.play();
       if (timerState === "LONG_BREAK") {
         setCurrentRound(1);
@@ -121,7 +121,7 @@ export function useInterva() {
   function handleVolumeClick() {
     if (volume === 0) {
       setVolume(100);
-      soundOnSound.current.currentTime = 0;
+      soundOnSound.current.currentTime = 0.15;
       soundOnSound.current.play();
     } else {
       setVolume(0);
@@ -132,10 +132,10 @@ export function useInterva() {
     setIsPlaying((prev) => {
       const next = !prev;
       if (next) {
-        unpauseSound.current.currentTime = 0;
+        unpauseSound.current.currentTime = 0.2;
         unpauseSound.current.play();
       } else {
-        pauseSound.current.currentTime = 0;
+        pauseSound.current.currentTime = 0.2;
         pauseSound.current.play();
       }
       return next;
@@ -151,7 +151,7 @@ export function useInterva() {
     setCurrentRound(1);
     setTimerState("FOCUS");
     setTimeLeft(FOCUS_TIME * 60);
-    resetSound.current.currentTime = 0;
+    resetSound.current.currentTime = 0.025;
     resetSound.current.play();
   }
 
