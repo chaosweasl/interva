@@ -69,7 +69,7 @@ export default function interva() {
             />
           </svg>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[12rem] text-center">
-            <div className="font-mono text-4xl mb-1.5">
+            <div className="font-space-mono text-4xl mb-5 mt-5">
               {hours > 0 && (
                 <>
                   <span aria-live="polite">

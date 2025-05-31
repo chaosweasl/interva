@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 const VOLUME_STORAGE_KEY = "interva-volume";
 
 // Timer constants in minutes
-export const FOCUS_TIME = 25;
+export const FOCUS_TIME = 90;
 export const SHORT_BREAK = 5;
 export const LONG_BREAK = 15;
 export const ROUNDS_BEFORE_LONG_BREAK = 4;
