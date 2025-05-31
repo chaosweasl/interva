@@ -37,22 +37,21 @@ export default function interva() {
   // Calculate progress (100 means full, 0 means empty)
   const progressValue = (currentTotalSeconds / totalSeconds) * 100;
 
-  // Color classes based on timerState
   const stateColors = {
     FOCUS: {
       circle: "text-primary",
-      digits: "text-primary",
-      label: "text-primary",
+      digits: "text-base-content",
+      label: "text-base-content",
     },
     SHORT_BREAK: {
       circle: "text-accent",
-      digits: "text-accent",
-      label: "text-accent",
+      digits: "text-base-content",
+      label: "text-base-content",
     },
     LONG_BREAK: {
       circle: "text-secondary",
-      digits: "text-secondary",
-      label: "text-secondary",
+      digits: "text-base-content",
+      label: "text-base-content",
     },
   };
   const colors = stateColors[timerState];

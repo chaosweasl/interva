@@ -32,7 +32,7 @@ export const PomodoroSettingsProvider = ({
   const [breakTime, setBreakTime] = useState(5);
   const [longBreak, setLongBreak] = useState(15);
   const [rounds, setRounds] = useState(4);
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("sunset");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
