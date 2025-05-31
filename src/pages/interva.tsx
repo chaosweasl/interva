@@ -37,6 +37,26 @@ export default function interva() {
   // Calculate progress (100 means full, 0 means empty)
   const progressValue = (currentTotalSeconds / totalSeconds) * 100;
 
+  // Color classes based on timerState
+  const stateColors = {
+    FOCUS: {
+      circle: "text-primary",
+      digits: "text-primary",
+      label: "text-primary",
+    },
+    SHORT_BREAK: {
+      circle: "text-accent",
+      digits: "text-accent",
+      label: "text-accent",
+    },
+    LONG_BREAK: {
+      circle: "text-secondary",
+      digits: "text-secondary",
+      label: "text-secondary",
+    },
+  };
+  const colors = stateColors[timerState];
+
   return (
     <div className="flex flex-col justify-between items-center h-screen bg-base-100 overflow-hidden">
       <div className="flex flex-col items-center mt-20">
@@ -54,7 +74,7 @@ export default function interva() {
             />
             {/* Progress circle */}
             <circle
-              className="text-primary transition-all duration-500 ease-in-out"
+              className={`${colors.circle} transition-all duration-500 ease-in-out`}
               strokeWidth="8"
               strokeLinecap="round"
               stroke="currentColor"
@@ -69,7 +89,9 @@ export default function interva() {
             />
           </svg>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[12rem] text-center">
-            <div className="font-space-mono text-4xl mb-5 mt-5">
+            <div
+              className={`font-space-mono text-4xl mb-5 mt-5 ${colors.digits}`}
+            >
               {hours > 0 && (
                 <>
                   <span aria-live="polite">
@@ -86,7 +108,7 @@ export default function interva() {
                 {seconds.toString().padStart(2, "0")}
               </span>
             </div>
-            <span className="text-xl font-medium">
+            <span className={`text-lg font-medium ${colors.label}`}>
               {timerState.replace("_", " ")}
             </span>
           </div>
