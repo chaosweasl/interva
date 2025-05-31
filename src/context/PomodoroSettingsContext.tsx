@@ -38,6 +38,37 @@ export const PomodoroSettingsProvider = ({
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+  // Load timer state from localStorage on mount
+  useEffect(() => {
+    const storedFocus = localStorage.getItem("focus");
+    const storedBreakTime = localStorage.getItem("breakTime");
+    const storedLongBreak = localStorage.getItem("longBreak");
+    const storedRounds = localStorage.getItem("rounds");
+    const storedTheme = localStorage.getItem("theme");
+    if (storedFocus) setFocus(Number(storedFocus));
+    if (storedBreakTime) setBreakTime(Number(storedBreakTime));
+    if (storedLongBreak) setLongBreak(Number(storedLongBreak));
+    if (storedRounds) setRounds(Number(storedRounds));
+    if (storedTheme) setTheme(storedTheme);
+  }, []);
+
+  // Save timer state to localStorage when changed
+  useEffect(() => {
+    localStorage.setItem("focus", String(focus));
+  }, [focus]);
+  useEffect(() => {
+    localStorage.setItem("breakTime", String(breakTime));
+  }, [breakTime]);
+  useEffect(() => {
+    localStorage.setItem("longBreak", String(longBreak));
+  }, [longBreak]);
+  useEffect(() => {
+    localStorage.setItem("rounds", String(rounds));
+  }, [rounds]);
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   return (
     <PomodoroSettingsContext.Provider
       value={{

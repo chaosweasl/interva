@@ -1,10 +1,5 @@
 import { Pause, Play, SkipForward, Volume2, VolumeX } from "lucide-react";
-import {
-  useInterva,
-  FOCUS_TIME,
-  SHORT_BREAK,
-  LONG_BREAK,
-} from "../hooks/useInterva";
+import { useInterva } from "../hooks/useInterva";
 
 export default function interva() {
   const {
@@ -27,12 +22,13 @@ export default function interva() {
   } = useInterva();
   // Calculate total seconds based on hours, minutes, and seconds
   const currentTotalSeconds = hours * 3600 + minutes * 60 + seconds;
+  // Use timerState and totalRounds from context, not constants
   const totalSeconds =
     timerState === "FOCUS"
-      ? FOCUS_TIME * 60
+      ? hours * 3600 + minutes * 60 + seconds || 1 // fallback to avoid div by 0
       : timerState === "SHORT_BREAK"
-      ? SHORT_BREAK * 60
-      : LONG_BREAK * 60;
+      ? hours * 3600 + minutes * 60 + seconds || 1
+      : hours * 3600 + minutes * 60 + seconds || 1;
 
   // Calculate progress (100 means full, 0 means empty)
   const progressValue = (currentTotalSeconds / totalSeconds) * 100;
