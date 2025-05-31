@@ -83,7 +83,7 @@ export function useInterva() {
         setTimeLeft(SHORT_BREAK * 60);
       }
     } else {
-      breakOverSound.current.currentTime = 0.1;
+      breakOverSound.current.currentTime = 0.05;
       breakOverSound.current.play();
       if (timerState === "LONG_BREAK") {
         setCurrentRound(1);
