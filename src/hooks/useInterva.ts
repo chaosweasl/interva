@@ -44,6 +44,11 @@ export function useInterva() {
   const soundOnSound = useRef(new Audio("/sounds/soundOn.mp3"));
   const focusOverSound = useRef(new Audio("/sounds/focusOver.mp3"));
   const breakOverSound = useRef(new Audio("/sounds/breakOver.mp3"));
+  const longBreakOverSound = useRef(new Audio("/sounds/longBreakOver.mp3"));
+  const longBreakReachedSound = useRef(
+    new Audio("/sounds/longBreakReached.mp3")
+  );
+  const tickingSound = useRef(new Audio("/sounds/ticking.mp3"));
 
   useEffect(() => {
     // side note: some audios were too loud, so I divided the volume
@@ -55,6 +60,9 @@ export function useInterva() {
     soundOnSound.current.volume = vol;
     focusOverSound.current.volume = vol;
     breakOverSound.current.volume = vol;
+    longBreakOverSound.current.volume = vol / 2;
+    longBreakReachedSound.current.volume = vol / 4;
+    tickingSound.current.volume = vol;
     localStorage.setItem(VOLUME_STORAGE_KEY, volume.toString());
   }, [volume]);
 
@@ -141,31 +149,37 @@ export function useInterva() {
     setIsPlaying(false);
 
     if (timerState === "FOCUS") {
-      focusOverSound.current.currentTime = 0.2;
-      focusOverSound.current.play();
       if (currentRound === rounds) {
+        longBreakReachedSound.current.currentTime = 0.2;
+        longBreakReachedSound.current.play();
         setTimerState("LONG_BREAK");
         setTimeLeft(longBreak * 60);
       } else {
+        focusOverSound.current.currentTime = 0.2;
+        focusOverSound.current.play();
         setTimerState("SHORT_BREAK");
         setTimeLeft(breakTime * 60);
       }
     } else {
-      breakOverSound.current.currentTime = 0.05;
-      breakOverSound.current.play();
       if (timerState === "LONG_BREAK") {
         setCurrentRound(1);
+        longBreakOverSound.current.currentTime = 0.2;
+        longBreakOverSound.current.play();
       } else {
+        breakOverSound.current.currentTime = 0.1;
+        breakOverSound.current.play();
         setCurrentRound((round) => round + 1);
       }
       setTimerState("FOCUS");
       setTimeLeft(focus * 60);
     }
 
-    // Auto-start the next timer after a short delay (without sound)
-    setTimeout(() => {
-      setIsPlaying(true);
-    }, 1000);
+    // Auto-start the next timer only if we haven't just completed a long break
+    if (timerState !== "LONG_BREAK") {
+      setTimeout(() => {
+        setIsPlaying(true);
+      }, 1000);
+    }
   }
 
   function handleVolumeMouseEnter() {
