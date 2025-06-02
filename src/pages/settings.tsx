@@ -34,7 +34,7 @@ export default function Settings() {
       <div className="flex flex-col items-center w-full h-full p-5 pt-20 pb-10">
         <label className="text-xl font-bold mb-4">Pomodoro Settings</label>
         <ul className="w-full gap-2 flex flex-col">
-          <li className="flex justify-center items-center flex-col gap-2">
+          <li className="flex justify-center items-center flex-col gap-1">
             <h1 className="block text-lg font-light text-primary tracking-wide uppercase drop-shadow-sm">
               Focus Time
             </h1>
@@ -45,7 +45,7 @@ export default function Settings() {
               </div>
             </fieldset>
 
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center w-full">
               <div className="relative w-full">
                 {/* Range */}
                 <input
@@ -59,7 +59,7 @@ export default function Settings() {
               </div>
             </div>
           </li>
-          <li className="flex justify-center items-center flex-col gap-2">
+          <li className="flex justify-center items-center flex-col gap-1">
             <h1 className="block text-lg font-light text-accent tracking-wide uppercase drop-shadow-sm">
               Break Time
             </h1>
@@ -70,7 +70,7 @@ export default function Settings() {
               </div>
             </fieldset>
 
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center w-full">
               <div className="relative w-full">
                 {/* Range */}
                 <input
@@ -84,7 +84,7 @@ export default function Settings() {
               </div>
             </div>
           </li>
-          <li className="flex justify-center items-center flex-col gap-2">
+          <li className="flex justify-center items-center flex-col gap-1">
             <h1 className="block text-lg font-light text-secondary tracking-wide uppercase drop-shadow-sm">
               Long Break Time
             </h1>
@@ -95,7 +95,7 @@ export default function Settings() {
               </div>
             </fieldset>
 
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center w-full">
               <div className="relative w-full">
                 {/* Range */}
                 <input
@@ -111,7 +111,7 @@ export default function Settings() {
               </div>
             </div>
           </li>
-          <li className="flex justify-center items-center flex-col gap-2">
+          <li className="flex justify-center items-center flex-col gap-1">
             <h1 className="block text-lg font-light text-neutral-content tracking-wide uppercase drop-shadow-sm">
               Rounds
             </h1>
@@ -122,7 +122,7 @@ export default function Settings() {
               </div>
             </fieldset>
 
-            <div className="flex items-center gap-2 w-full">
+            <div className="flex items-center w-full">
               <div className="relative w-full">
                 {/* Range */}
                 <input
