@@ -1,6 +1,5 @@
 import { Minus, Settings2, X, Pin, PinOff } from "lucide-react";
-import { Window } from "@tauri-apps/api/window";
-import { useEffect } from "react";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Link } from "react-router-dom";
 
 // when using `"withGlobalTauri": true`, you may use
@@ -9,24 +8,14 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   const isPinned = false;
 
-  useEffect(() => {
-    const appWindow = Window.getCurrent();
+  const appWindow = getCurrentWindow();
 
-    const minimizeButton = document.getElementById("titlebar-minimize");
-    const closeButton = document.getElementById("titlebar-close");
-
-    const onMinimize = () => appWindow.minimize();
-    const onClose = () => appWindow.close();
-
-    if (minimizeButton) minimizeButton.addEventListener("click", onMinimize);
-    if (closeButton) closeButton.addEventListener("click", onClose);
-
-    return () => {
-      if (minimizeButton)
-        minimizeButton.removeEventListener("click", onMinimize);
-      if (closeButton) closeButton.removeEventListener("click", onClose);
-    };
-  }, []);
+  async function minimizeApp() {
+    await appWindow.minimize();
+  }
+  async function closeApp() {
+    await appWindow.close();
+  }
 
   return (
     <div
@@ -93,13 +82,13 @@ export default function Navbar() {
         </button>
 
         <button
-          id="titlebar-minimize"
+          onClick={minimizeApp}
           className="btn btn-sm btn-ghost btn-circle"
         >
           <Minus />
         </button>
 
-        <button id="titlebar-close" className="btn btn-sm btn-ghost btn-circle">
+        <button onClick={closeApp} className="btn btn-sm btn-ghost btn-circle">
           <X />
         </button>
       </div>
