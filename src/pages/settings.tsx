@@ -15,14 +15,25 @@ export default function Settings() {
   // Handler to reset rounds when focus time changes
   const handleFocusChange = (value: number) => {
     setFocusTime(value);
-    setRounds(1);
+  };
+
+  const handleBreakChange = (value: number) => {
+    setBreakTime(value);
+  };
+
+  const handleLongBreakChange = (value: number) => {
+    setLongBreakTime(value);
+  };
+
+  const handleRoundsChange = (value: number) => {
+    setRounds(value);
   };
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-screen bg-base-100 overflow-auto">
+    <div className="flex flex-col justify-between items-center min-h-screen bg-base-100">
       <div className="flex flex-col items-center w-full h-full p-5 pt-20 pb-10">
         <label className="text-xl font-bold mb-4">Pomodoro Settings</label>
-        <ul className="w-full max-w-md">
+        <ul className="w-full gap-2 flex flex-col">
           <li className="flex justify-center items-center flex-col gap-2">
             <h1 className="block text-lg font-light text-primary tracking-wide uppercase drop-shadow-sm">
               Focus Time
@@ -48,32 +59,82 @@ export default function Settings() {
               </div>
             </div>
           </li>
-          <li>
-            <h1 className="block mb-2">Break Time</h1>
-            <input
-              type="number"
-              value={breakTime}
-              onChange={(e) => setBreakTime(Number(e.target.value))}
-              className="input input-bordered w-full max-w-xs mb-4"
-            />
+          <li className="flex justify-center items-center flex-col gap-2">
+            <h1 className="block text-lg font-light text-accent tracking-wide uppercase drop-shadow-sm">
+              Break Time
+            </h1>
+
+            <fieldset>
+              <div className="w-15 h-8 text-center badge badge-accent badge-soft">
+                {breakTime}:00
+              </div>
+            </fieldset>
+
+            <div className="flex items-center gap-2 w-full">
+              <div className="relative w-full">
+                {/* Range */}
+                <input
+                  type="range"
+                  min="1"
+                  max="120"
+                  value={breakTime}
+                  onChange={(e) => handleBreakChange(Number(e.target.value))}
+                  className="range range-xs range-accent w-full"
+                />
+              </div>
+            </div>
           </li>
-          <li>
-            <h1 className="block mb-2">Long Break</h1>
-            <input
-              type="number"
-              value={longBreakTime}
-              onChange={(e) => setLongBreakTime(Number(e.target.value))}
-              className="input input-bordered w-full max-w-xs mb-4"
-            />
+          <li className="flex justify-center items-center flex-col gap-2">
+            <h1 className="block text-lg font-light text-secondary tracking-wide uppercase drop-shadow-sm">
+              Long Break Time
+            </h1>
+
+            <fieldset>
+              <div className="w-15 h-8 text-center badge badge-secondary badge-soft">
+                {longBreakTime}:00
+              </div>
+            </fieldset>
+
+            <div className="flex items-center gap-2 w-full">
+              <div className="relative w-full">
+                {/* Range */}
+                <input
+                  type="range"
+                  min="1"
+                  max="120"
+                  value={longBreakTime}
+                  onChange={(e) =>
+                    handleLongBreakChange(Number(e.target.value))
+                  }
+                  className="range range-xs range-secondary w-full"
+                />
+              </div>
+            </div>
           </li>
-          <li>
-            <h1 className="block mb-2">Rounds</h1>
-            <input
-              type="number"
-              value={rounds}
-              onChange={(e) => setRounds(Number(e.target.value))}
-              className="input input-bordered w-full max-w-xs mb-4"
-            />
+          <li className="flex justify-center items-center flex-col gap-2">
+            <h1 className="block text-lg font-light text-neutral-content tracking-wide uppercase drop-shadow-sm">
+              Rounds
+            </h1>
+
+            <fieldset>
+              <div className="w-15 h-8 text-center badge badge-neutral-content badge-soft">
+                {rounds}
+              </div>
+            </fieldset>
+
+            <div className="flex items-center gap-2 w-full">
+              <div className="relative w-full">
+                {/* Range */}
+                <input
+                  type="range"
+                  min="1"
+                  max="8"
+                  value={rounds}
+                  onChange={(e) => handleRoundsChange(Number(e.target.value))}
+                  className="range range-xs range-neutral-content w-full"
+                />
+              </div>
+            </div>
           </li>
         </ul>
       </div>
