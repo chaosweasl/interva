@@ -11,8 +11,9 @@
 <!-- - find a library to use time -->
 <!-- - implement timer logic -->
 <!-- - add new colors for when break vs long break vs focus -->
+<!-- - add a cooler sound when reaching the long break -->
 
-- add a cooler sound when reaching the long break
+- add a ticking sound
 
 ## settings
 
