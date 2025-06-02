@@ -1,4 +1,4 @@
-import { Minus, Settings2, X } from "lucide-react";
+import { Minus, Settings2, X, Pin, PinOff } from "lucide-react";
 import { Window } from "@tauri-apps/api/window";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 // const { getCurrentWindow } = window.__TAURI__.window;
 
 export default function Navbar() {
+  const isPinned = false;
+
   useEffect(() => {
     const appWindow = Window.getCurrent();
 
@@ -33,7 +35,11 @@ export default function Navbar() {
     >
       <div data-tauri-drag-region className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-sm btn-ghost btn-circle"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -68,20 +74,32 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <Link to="/settings" className="btn btn-ghost btn-circle">
+        <Link to="/settings" className="btn btn-sm btn-ghost btn-circle">
           <Settings2 className="w-5 h-5" />
         </Link>
       </div>
       <div data-tauri-drag-region className="navbar-center">
-        <Link to="/" className="btn btn-ghost font-semibold text-xl">
+        <Link to="/" className="btn btn-sm btn-ghost font-semibold text-xl">
           interva
         </Link>
       </div>
       <div data-tauri-drag-region className="navbar-end">
-        <button id="titlebar-minimize" className="btn btn-ghost btn-circle">
+        <button id="pin" className="btn btn-sm btn-ghost btn-circle">
+          {isPinned ? (
+            <PinOff className="w-5 h-5" />
+          ) : (
+            <Pin className="w-5 h-5" />
+          )}
+        </button>
+
+        <button
+          id="titlebar-minimize"
+          className="btn btn-sm btn-ghost btn-circle"
+        >
           <Minus />
         </button>
-        <button id="titlebar-close" className="btn btn-ghost btn-circle">
+
+        <button id="titlebar-close" className="btn btn-sm btn-ghost btn-circle">
           <X />
         </button>
       </div>

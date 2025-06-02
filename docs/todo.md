@@ -17,7 +17,8 @@
 
 ## settings
 
-- add settings for changing pomo time
+<!-- - add settings for changing pomo time -->
+
 - add settings for OS integration (e.g always on top, start up on launch, etc)
 
 ## about
