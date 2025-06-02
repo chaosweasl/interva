@@ -5,19 +5,20 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+import { enable, isEnabled, disable } from "@tauri-apps/plugin-autostart";
 
 // Rename context values for consistency
 type PomodoroSettings = {
-  theme: string;
   focusTime: number;
   breakTime: number;
   longBreakTime: number;
   rounds: number;
-  setTheme: (theme: string) => void;
+  autoStart: boolean; // Make sure this matches
   setFocusTime: (value: number) => void;
   setBreakTime: (value: number) => void;
   setLongBreakTime: (value: number) => void;
   setRounds: (value: number) => void;
+  toggleAutoStart: () => Promise<void>;
 };
 
 const PomodoroSettingsContext = createContext<PomodoroSettings | undefined>(
@@ -33,11 +34,7 @@ export const PomodoroSettingsProvider = ({
   const [breakTime, setBreakTime] = useState(5);
   const [longBreakTime, setLongBreakTime] = useState(15);
   const [rounds, setRounds] = useState(4);
-  const [theme, setTheme] = useState("sunset");
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  const [autoStart, setAutoStart] = useState(false);
 
   // Load timer state from localStorage on mount
   useEffect(() => {
@@ -45,12 +42,12 @@ export const PomodoroSettingsProvider = ({
     const storedBreakTime = localStorage.getItem("breakTime");
     const storedLongBreak = localStorage.getItem("longBreakTime");
     const storedRounds = localStorage.getItem("rounds");
-    const storedTheme = localStorage.getItem("theme");
+    const storedAutoStart = localStorage.getItem("autoStart");
     if (storedFocus) setFocusTime(Number(storedFocus));
     if (storedBreakTime) setBreakTime(Number(storedBreakTime));
     if (storedLongBreak) setLongBreakTime(Number(storedLongBreak));
     if (storedRounds) setRounds(Number(storedRounds));
-    if (storedTheme) setTheme(storedTheme);
+    if (storedAutoStart) setAutoStart(JSON.parse(storedAutoStart));
   }, []);
 
   // Save timer state to localStorage when changed
@@ -67,22 +64,50 @@ export const PomodoroSettingsProvider = ({
     localStorage.setItem("rounds", String(rounds));
   }, [rounds]);
   useEffect(() => {
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    localStorage.setItem("autoStart", JSON.stringify(autoStart));
+  }, [autoStart]);
+
+  // Check initial autostart status on mount
+  useEffect(() => {
+    const checkAutoStart = async () => {
+      try {
+        const enabled = await isEnabled();
+        setAutoStart(enabled);
+      } catch (error) {
+        console.error("Failed to check autostart status:", error);
+      }
+    };
+    checkAutoStart();
+  }, []);
+
+  const toggleAutoStart = async () => {
+    try {
+      if (autoStart) {
+        await disable();
+      } else {
+        await enable();
+      }
+      const newState = await isEnabled();
+      setAutoStart(newState);
+      localStorage.setItem("autoStart", JSON.stringify(newState));
+    } catch (error) {
+      console.error("Failed to toggle autostart:", error);
+    }
+  };
 
   return (
     <PomodoroSettingsContext.Provider
       value={{
-        theme,
         focusTime,
         breakTime,
         longBreakTime,
         rounds,
-        setTheme,
+        autoStart,
         setFocusTime,
         setBreakTime,
         setLongBreakTime,
         setRounds,
+        toggleAutoStart,
       }}
     >
       {children}

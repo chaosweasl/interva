@@ -6,10 +6,12 @@ export default function Settings() {
     breakTime,
     longBreakTime,
     rounds,
+    autoStart,
     setFocusTime,
     setBreakTime,
     setLongBreakTime,
     setRounds,
+    toggleAutoStart,
   } = usePomodoroSettings();
 
   // Handler to reset rounds when focus time changes
@@ -135,6 +137,19 @@ export default function Settings() {
                 />
               </div>
             </div>
+          </li>
+          <li>
+            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4">
+              <label className="label cursor-pointer">
+                <span className="label-text">Open on Startup</span>
+                <input
+                  type="checkbox"
+                  checked={autoStart}
+                  onChange={toggleAutoStart}
+                  className="checkbox"
+                />
+              </label>
+            </fieldset>
           </li>
         </ul>
       </div>
