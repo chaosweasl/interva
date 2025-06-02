@@ -31,16 +31,16 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col justify-between items-center min-h-screen bg-base-100">
-      <div className="flex flex-col items-center w-full h-full p-5 pt-20 pb-10">
-        <label className="text-xl font-bold mb-4">Pomodoro Settings</label>
-        <ul className="w-full gap-2 flex flex-col">
+      <div className="flex flex-col items-center w-full h-full p-5 pt-15 pb-10">
+        <label className="text-lg font-semibold mb-1">Pomodoro Settings</label>
+        <ul className="w-full gap-1 flex flex-col">
           <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-lg font-light text-primary tracking-wide uppercase drop-shadow-sm">
+            <h1 className="block text-base font-light text-primary tracking-wide uppercase drop-shadow-sm">
               Focus Time
             </h1>
 
             <fieldset>
-              <div className="w-15 h-8 text-center badge badge-primary badge-soft">
+              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-primary badge-soft">
                 {focusTime}:00
               </div>
             </fieldset>
@@ -60,12 +60,12 @@ export default function Settings() {
             </div>
           </li>
           <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-lg font-light text-accent tracking-wide uppercase drop-shadow-sm">
+            <h1 className="block text-base font-light text-accent tracking-wide uppercase drop-shadow-sm">
               Break Time
             </h1>
 
             <fieldset>
-              <div className="w-15 h-8 text-center badge badge-accent badge-soft">
+              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-accent badge-soft">
                 {breakTime}:00
               </div>
             </fieldset>
@@ -85,12 +85,12 @@ export default function Settings() {
             </div>
           </li>
           <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-lg font-light text-secondary tracking-wide uppercase drop-shadow-sm">
+            <h1 className="block text-base font-light text-secondary tracking-wide uppercase drop-shadow-sm">
               Long Break Time
             </h1>
 
             <fieldset>
-              <div className="w-15 h-8 text-center badge badge-secondary badge-soft">
+              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-secondary badge-soft">
                 {longBreakTime}:00
               </div>
             </fieldset>
@@ -112,12 +112,12 @@ export default function Settings() {
             </div>
           </li>
           <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-lg font-light text-neutral-content tracking-wide uppercase drop-shadow-sm">
+            <h1 className="block text-base font-light text-neutral-content tracking-wide uppercase drop-shadow-sm">
               Rounds
             </h1>
 
             <fieldset>
-              <div className="w-15 h-8 text-center badge badge-neutral-content badge-soft">
+              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-neutral-content badge-soft">
                 {rounds}
               </div>
             </fieldset>
