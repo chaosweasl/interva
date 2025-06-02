@@ -19,6 +19,7 @@ type PomodoroSettings = {
   setLongBreakTime: (value: number) => void;
   setRounds: (value: number) => void;
   toggleAutoStart: () => Promise<void>;
+  resetToDefaults: () => void; // Add to type definition
 };
 
 const PomodoroSettingsContext = createContext<PomodoroSettings | undefined>(
@@ -30,10 +31,17 @@ export const PomodoroSettingsProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [focusTime, setFocusTime] = useState(25);
-  const [breakTime, setBreakTime] = useState(5);
-  const [longBreakTime, setLongBreakTime] = useState(15);
-  const [rounds, setRounds] = useState(4);
+  // Define default values as constants
+  const DEFAULT_FOCUS_TIME = 25;
+  const DEFAULT_BREAK_TIME = 5;
+  const DEFAULT_LONG_BREAK_TIME = 15;
+  const DEFAULT_ROUNDS = 4;
+  const DEFAULT_STARTUP = false;
+
+  const [focusTime, setFocusTime] = useState(DEFAULT_FOCUS_TIME);
+  const [breakTime, setBreakTime] = useState(DEFAULT_BREAK_TIME);
+  const [longBreakTime, setLongBreakTime] = useState(DEFAULT_LONG_BREAK_TIME);
+  const [rounds, setRounds] = useState(DEFAULT_ROUNDS);
   const [autoStart, setAutoStart] = useState(false);
 
   // Load timer state from localStorage on mount
@@ -95,6 +103,14 @@ export const PomodoroSettingsProvider = ({
     }
   };
 
+  const resetToDefaults = () => {
+    setFocusTime(DEFAULT_FOCUS_TIME);
+    setBreakTime(DEFAULT_BREAK_TIME);
+    setLongBreakTime(DEFAULT_LONG_BREAK_TIME);
+    setRounds(DEFAULT_ROUNDS);
+    setAutoStart(DEFAULT_STARTUP);
+  };
+
   return (
     <PomodoroSettingsContext.Provider
       value={{
@@ -108,6 +124,7 @@ export const PomodoroSettingsProvider = ({
         setLongBreakTime,
         setRounds,
         toggleAutoStart,
+        resetToDefaults,
       }}
     >
       {children}
