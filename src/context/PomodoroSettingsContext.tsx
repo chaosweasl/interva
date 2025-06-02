@@ -6,16 +6,17 @@ import {
   useEffect,
 } from "react";
 
+// Rename context values for consistency
 type PomodoroSettings = {
   theme: string;
-  focus: number;
+  focusTime: number;
   breakTime: number;
-  longBreak: number;
+  longBreakTime: number;
   rounds: number;
   setTheme: (theme: string) => void;
-  setFocus: (value: number) => void;
+  setFocusTime: (value: number) => void;
   setBreakTime: (value: number) => void;
-  setLongBreak: (value: number) => void;
+  setLongBreakTime: (value: number) => void;
   setRounds: (value: number) => void;
 };
 
@@ -28,9 +29,9 @@ export const PomodoroSettingsProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [focus, setFocus] = useState(25);
+  const [focusTime, setFocusTime] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
-  const [longBreak, setLongBreak] = useState(15);
+  const [longBreakTime, setLongBreakTime] = useState(15);
   const [rounds, setRounds] = useState(4);
   const [theme, setTheme] = useState("sunset");
 
@@ -40,28 +41,28 @@ export const PomodoroSettingsProvider = ({
 
   // Load timer state from localStorage on mount
   useEffect(() => {
-    const storedFocus = localStorage.getItem("focus");
+    const storedFocus = localStorage.getItem("focusTime");
     const storedBreakTime = localStorage.getItem("breakTime");
-    const storedLongBreak = localStorage.getItem("longBreak");
+    const storedLongBreak = localStorage.getItem("longBreakTime");
     const storedRounds = localStorage.getItem("rounds");
     const storedTheme = localStorage.getItem("theme");
-    if (storedFocus) setFocus(Number(storedFocus));
+    if (storedFocus) setFocusTime(Number(storedFocus));
     if (storedBreakTime) setBreakTime(Number(storedBreakTime));
-    if (storedLongBreak) setLongBreak(Number(storedLongBreak));
+    if (storedLongBreak) setLongBreakTime(Number(storedLongBreak));
     if (storedRounds) setRounds(Number(storedRounds));
     if (storedTheme) setTheme(storedTheme);
   }, []);
 
   // Save timer state to localStorage when changed
   useEffect(() => {
-    localStorage.setItem("focus", String(focus));
-  }, [focus]);
+    localStorage.setItem("focusTime", String(focusTime));
+  }, [focusTime]);
   useEffect(() => {
     localStorage.setItem("breakTime", String(breakTime));
   }, [breakTime]);
   useEffect(() => {
-    localStorage.setItem("longBreak", String(longBreak));
-  }, [longBreak]);
+    localStorage.setItem("longBreakTime", String(longBreakTime));
+  }, [longBreakTime]);
   useEffect(() => {
     localStorage.setItem("rounds", String(rounds));
   }, [rounds]);
@@ -73,14 +74,14 @@ export const PomodoroSettingsProvider = ({
     <PomodoroSettingsContext.Provider
       value={{
         theme,
-        focus,
+        focusTime,
         breakTime,
-        longBreak,
+        longBreakTime,
         rounds,
         setTheme,
-        setFocus,
+        setFocusTime,
         setBreakTime,
-        setLongBreak,
+        setLongBreakTime,
         setRounds,
       }}
     >

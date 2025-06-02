@@ -4,7 +4,7 @@ import { usePomodoroSettings } from "../context/PomodoroSettingsContext";
 const VOLUME_STORAGE_KEY = "interva-volume";
 
 export function useInterva() {
-  const { focus, breakTime, longBreak, rounds } = usePomodoroSettings();
+  const { focusTime, breakTime, longBreakTime, rounds } = usePomodoroSettings();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(() => {
@@ -14,7 +14,7 @@ export function useInterva() {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [timeLeft, setTimeLeft] = useState(() => {
     const saved = localStorage.getItem("interva-timeLeft");
-    return saved ? parseInt(saved, 10) : focus * 60;
+    return saved ? parseInt(saved, 10) : focusTime * 60;
   });
   const [currentRound, setCurrentRound] = useState(() => {
     const saved = localStorage.getItem("interva-currentRound");
@@ -95,9 +95,9 @@ export function useInterva() {
   useEffect(() => {
     const storedSettings = localStorage.getItem("interva-settings");
     const currentSettings = JSON.stringify({
-      focus,
+      focusTime,
       breakTime,
-      longBreak,
+      longBreakTime,
       rounds,
     });
     if (storedSettings === currentSettings) {
@@ -118,7 +118,7 @@ export function useInterva() {
       }
     } else {
       // If settings changed, reset timer
-      setTimeLeft(focus * 60);
+      setTimeLeft(focusTime * 60);
       setCurrentRound(1);
       setTimerState("FOCUS");
       localStorage.removeItem("interva-timeLeft");
@@ -126,7 +126,17 @@ export function useInterva() {
       localStorage.removeItem("interva-timerState");
       localStorage.setItem("interva-settings", currentSettings);
     }
-  }, [focus, breakTime, longBreak, rounds]);
+  }, [focusTime, breakTime, longBreakTime, rounds]);
+
+  // Reset timer state in localStorage and in state if the context values change (e.g. user changes focus/break/rounds in settings)
+  useEffect(() => {
+    setTimeLeft(focusTime * 60);
+    setCurrentRound(1);
+    setTimerState("FOCUS");
+    localStorage.removeItem("interva-timeLeft");
+    localStorage.removeItem("interva-currentRound");
+    localStorage.removeItem("interva-timerState");
+  }, [focusTime, breakTime, longBreakTime, rounds]);
 
   // Save to localStorage when changed
   useEffect(() => {
@@ -141,9 +151,9 @@ export function useInterva() {
   useEffect(() => {
     localStorage.setItem(
       "interva-settings",
-      JSON.stringify({ focus, breakTime, longBreak, rounds })
+      JSON.stringify({ focusTime, breakTime, longBreakTime, rounds })
     );
-  }, [focus, breakTime, longBreak, rounds]);
+  }, [focusTime, breakTime, longBreakTime, rounds]);
 
   function handleTimerComplete() {
     setIsPlaying(false);
@@ -153,7 +163,7 @@ export function useInterva() {
         longBreakReachedSound.current.currentTime = 0.2;
         longBreakReachedSound.current.play();
         setTimerState("LONG_BREAK");
-        setTimeLeft(longBreak * 60);
+        setTimeLeft(longBreakTime * 60);
       } else {
         focusOverSound.current.currentTime = 0.2;
         focusOverSound.current.play();
@@ -171,7 +181,7 @@ export function useInterva() {
         setCurrentRound((round) => round + 1);
       }
       setTimerState("FOCUS");
-      setTimeLeft(focus * 60);
+      setTimeLeft(focusTime * 60);
     }
 
     // Auto-start the next timer only if we haven't just completed a long break
@@ -232,7 +242,7 @@ export function useInterva() {
     setIsPlaying(false);
     setCurrentRound(1);
     setTimerState("FOCUS");
-    setTimeLeft(focus * 60);
+    setTimeLeft(focusTime * 60);
     resetSound.current.currentTime = 0.025;
     resetSound.current.play();
   }
