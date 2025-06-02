@@ -1,20 +1,30 @@
 import { Minus, Settings2, X, Pin, PinOff } from "lucide-react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 // when using `"withGlobalTauri": true`, you may use
 // const { getCurrentWindow } = window.__TAURI__.window;
 
 export default function Navbar() {
-  const isPinned = false;
-
   const appWindow = getCurrentWindow();
+  const [isPinned, setIsPinned] = useState(false);
 
   async function minimizeApp() {
     await appWindow.minimize();
   }
+
   async function closeApp() {
     await appWindow.close();
+  }
+
+  async function togglePin() {
+    try {
+      await appWindow.setAlwaysOnTop(!isPinned);
+      setIsPinned(!isPinned);
+    } catch (error) {
+      console.error("Failed to toggle always on top:", error);
+    }
   }
 
   return (
@@ -73,13 +83,18 @@ export default function Navbar() {
         </Link>
       </div>
       <div data-tauri-drag-region className="navbar-end">
-        <button id="pin" className="btn btn-sm btn-ghost btn-circle">
-          {isPinned ? (
-            <PinOff className="w-5 h-5" />
-          ) : (
-            <Pin className="w-5 h-5" />
-          )}
-        </button>
+        <div className="tooltip tooltip-bottom" data-tip="Pin to top">
+          <button
+            onClick={togglePin}
+            className="btn btn-sm btn-ghost btn-circle"
+          >
+            {isPinned ? (
+              <PinOff className="w-5 h-5" />
+            ) : (
+              <Pin className="w-5 h-5" />
+            )}
+          </button>
+        </div>
 
         <button
           onClick={minimizeApp}
