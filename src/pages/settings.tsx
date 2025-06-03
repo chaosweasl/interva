@@ -34,75 +34,97 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col justify-between items-center min-h-screen bg-base-100">
-      <div className="flex flex-col items-center w-full h-full p-5 pt-15 pb-10">
-        <div className="flex justify-center items-center w-full mb-4">
-          <label className="text-lg font-semibold">Pomodoro Settings</label>
-        </div>
-        <ul className="w-full gap-1 flex flex-col">
-          <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-base font-semibold text-primary tracking-wide uppercase drop-shadow-xs">
-              Focus Time
-            </h1>
+      <div className="flex flex-col items-center w-full max-w-xl h-full p-5 pt-15 pb-10">
+        {/* Timer Settings Section */}
+        <div className="w-full">
+          <div className="flex justify-between items-center w-full mb-6">
+            <h2 className="text-xl font-bold">Timer Settings</h2>
+            <button
+              onClick={resetToDefaults}
+              className="btn btn-ghost btn-sm gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+              </svg>
+              Reset defaults
+            </button>
+          </div>
 
-            <fieldset>
-              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-primary">
-                {focusTime}:00
-              </div>
-            </fieldset>
-
-            <div className="flex items-center w-full">
-              <div className="relative w-full">
-                {/* Range */}
+          <div className="grid gap-6">
+            {/* Focus Time */}
+            <div className="card bg-base-200">
+              <div className="card-body p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-base font-semibold text-primary">
+                    Focus Time
+                  </h3>
+                  <div className="badge badge-primary badge-lg">
+                    {focusTime}:00
+                  </div>
+                </div>
                 <input
                   type="range"
                   min="1"
                   max="120"
                   value={focusTime}
                   onChange={(e) => handleFocusChange(Number(e.target.value))}
-                  className="range range-xs range-primary w-full"
+                  className="range range-sm range-primary"
                 />
+                <div className="w-full flex justify-between text-xs px-2">
+                  <span>1:00</span>
+                  <span>120:00</span>
+                </div>
               </div>
             </div>
-          </li>
-          <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-base font-semibold text-accent tracking-wide uppercase drop-shadow-xs">
-              Break Time
-            </h1>
 
-            <fieldset>
-              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-accent">
-                {breakTime}:00
-              </div>
-            </fieldset>
-
-            <div className="flex items-center w-full">
-              <div className="relative w-full">
-                {/* Range */}
+            {/* Break Time - Similar structure */}
+            <div className="card bg-base-200">
+              <div className="card-body p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-base font-semibold text-accent">
+                    Break Time
+                  </h3>
+                  <div className="badge badge-accent badge-lg">
+                    {breakTime}:00
+                  </div>
+                </div>
                 <input
                   type="range"
                   min="1"
                   max="120"
                   value={breakTime}
                   onChange={(e) => handleBreakChange(Number(e.target.value))}
-                  className="range range-xs range-accent w-full"
+                  className="range range-sm range-accent"
                 />
+                <div className="w-full flex justify-between text-xs px-2">
+                  <span>1:00</span>
+                  <span>120:00</span>
+                </div>
               </div>
             </div>
-          </li>
-          <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-base font-semibold text-secondary tracking-wide uppercase drop-shadow-xs">
-              Long Break Time
-            </h1>
 
-            <fieldset>
-              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-secondary">
-                {longBreakTime}:00
-              </div>
-            </fieldset>
-
-            <div className="flex items-center w-full">
-              <div className="relative w-full">
-                {/* Range */}
+            {/* Long Break Time - Similar structure */}
+            <div className="card bg-base-200">
+              <div className="card-body p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-base font-semibold text-secondary">
+                    Long Break
+                  </h3>
+                  <div className="badge badge-secondary badge-lg">
+                    {longBreakTime}:00
+                  </div>
+                </div>
                 <input
                   type="range"
                   min="1"
@@ -111,59 +133,56 @@ export default function Settings() {
                   onChange={(e) =>
                     handleLongBreakChange(Number(e.target.value))
                   }
-                  className="range range-xs range-secondary w-full"
+                  className="range range-sm range-secondary"
                 />
+                <div className="w-full flex justify-between text-xs px-2">
+                  <span>1:00</span>
+                  <span>120:00</span>
+                </div>
               </div>
             </div>
-          </li>
-          <li className="flex justify-center items-center flex-col gap-1">
-            <h1 className="block text-base font-semibold text-neutral-content tracking-wide uppercase drop-shadow-xs">
-              Rounds
-            </h1>
 
-            <fieldset>
-              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-neutral">
-                {rounds}
-              </div>
-            </fieldset>
-
-            <div className="flex items-center w-full">
-              <div className="relative w-full">
-                {/* Range */}
+            {/* Rounds - Similar structure */}
+            <div className="card bg-base-200">
+              <div className="card-body p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-base font-semibold">Rounds</h3>
+                  <div className="badge badge-neutral badge-lg">{rounds}</div>
+                </div>
                 <input
                   type="range"
                   min="1"
                   max="8"
                   value={rounds}
                   onChange={(e) => handleRoundsChange(Number(e.target.value))}
-                  className="range range-xs range-neutral-content w-full"
+                  className="range range-sm range-neutral"
                 />
+                <div className="w-full flex justify-between text-xs px-2">
+                  <span>1</span>
+                  <span>8</span>
+                </div>
               </div>
             </div>
-          </li>
-          <div className="flex justify-center items-center w-full mt-5 mb-5">
-            <label className="text-lg font-semibold">App Settings</label>
           </div>
-          <li>
-            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-3">
-              <label className="label cursor-pointer">
-                <span className="label-text">Open on Startup</span>
+        </div>
+
+        {/* App Settings Section */}
+        <div className="w-full mt-8">
+          <h2 className="text-xl font-bold mb-4">App Settings</h2>
+          <div className="card bg-base-200">
+            <div className="card-body p-4">
+              <label className="flex cursor-pointer gap-4">
+                <span className="flex-1">Open on Startup</span>
                 <input
                   type="checkbox"
                   checked={autoStart}
                   onChange={toggleAutoStart}
-                  className="checkbox"
+                  className="toggle toggle-primary"
                 />
               </label>
-            </fieldset>
-            <button
-              onClick={resetToDefaults}
-              className="btn btn-ghost btn-sm normal-case flex justify-center items-center w-full mt-2"
-            >
-              Reset to defaults
-            </button>
-          </li>
-        </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
