@@ -1,7 +1,32 @@
 import { useRef, useState, useEffect } from "react";
 import { usePomodoroSettings } from "../context/PomodoroSettingsContext";
 
-const VOLUME_STORAGE_KEY = "interva-volume";
+enum TimerState {
+  FOCUS = "FOCUS",
+  SHORT_BREAK = "SHORT_BREAK",
+  LONG_BREAK = "LONG_BREAK",
+}
+
+const STORAGE_KEYS = {
+  VOLUME: "interva-volume",
+  TIME_LEFT: "interva-timeLeft",
+  CURRENT_ROUND: "interva-currentRound",
+  TIMER_STATE: "interva-timerState",
+  SETTINGS: "interva-settings",
+} as const;
+
+const AUDIO_FILES = {
+  pause: "/sounds/pause.mp3",
+  unpause: "/sounds/unpause.mp3",
+  timerEnd: "/sounds/timerEnd.mp3",
+  reset: "/sounds/reset.mp3",
+  soundOn: "/sounds/soundOn.mp3",
+  focusOver: "/sounds/focusOver.mp3",
+  breakOver: "/sounds/breakOver.mp3",
+  longBreakOver: "/sounds/longBreakOver.mp3",
+  longBreakReached: "/sounds/longBreakReached.mp3",
+  ticking: "/sounds/ticking.flac",
+} as const;
 
 export function useInterva() {
   const { focusTime, breakTime, longBreakTime, rounds, tickingEnabled } =
@@ -9,64 +34,55 @@ export function useInterva() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(() => {
-    const savedVolume = localStorage.getItem(VOLUME_STORAGE_KEY);
+    const savedVolume = localStorage.getItem(STORAGE_KEYS.VOLUME);
     return savedVolume ? parseInt(savedVolume, 10) : 100;
   });
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [timeLeft, setTimeLeft] = useState(() => {
-    const saved = localStorage.getItem("interva-timeLeft");
+    const saved = localStorage.getItem(STORAGE_KEYS.TIME_LEFT);
     return saved ? parseInt(saved, 10) : focusTime * 60;
   });
   const [currentRound, setCurrentRound] = useState(() => {
-    const saved = localStorage.getItem("interva-currentRound");
+    const saved = localStorage.getItem(STORAGE_KEYS.CURRENT_ROUND);
     return saved ? parseInt(saved, 10) : 1;
   });
-  const [timerState, setTimerState] = useState<
-    "FOCUS" | "SHORT_BREAK" | "LONG_BREAK"
-  >(() => {
-    const saved = localStorage.getItem("interva-timerState");
-    if (
-      saved === "FOCUS" ||
-      saved === "SHORT_BREAK" ||
-      saved === "LONG_BREAK"
-    ) {
-      return saved;
-    }
-    return "FOCUS";
+  const [timerState, setTimerState] = useState<TimerState>(() => {
+    const saved = localStorage.getItem(STORAGE_KEYS.TIMER_STATE) as TimerState;
+    return Object.values(TimerState).includes(saved) ? saved : TimerState.FOCUS;
   });
 
   const intervalRef = useRef<number>();
   const volumeTimeoutRef = useRef<number | null>(null);
 
-  const pauseSound = useRef(new Audio("/sounds/pause.mp3"));
-  const unpauseSound = useRef(new Audio("/sounds/unpause.mp3"));
-  const timerEndSound = useRef(new Audio("/sounds/timerEnd.mp3"));
-  const resetSound = useRef(new Audio("/sounds/reset.mp3"));
-  const soundOnSound = useRef(new Audio("/sounds/soundOn.mp3"));
-  const focusOverSound = useRef(new Audio("/sounds/focusOver.mp3"));
-  const breakOverSound = useRef(new Audio("/sounds/breakOver.mp3"));
-  const longBreakOverSound = useRef(new Audio("/sounds/longBreakOver.mp3"));
-  const longBreakReachedSound = useRef(
-    new Audio("/sounds/longBreakReached.mp3")
-  );
-  const tickingSound = useRef(new Audio("/sounds/ticking.flac"));
+  // Initialize audio refs
+  const audio = {
+    pause: useRef(new Audio(AUDIO_FILES.pause)),
+    unpause: useRef(new Audio(AUDIO_FILES.unpause)),
+    timerEnd: useRef(new Audio(AUDIO_FILES.timerEnd)),
+    reset: useRef(new Audio(AUDIO_FILES.reset)),
+    soundOn: useRef(new Audio(AUDIO_FILES.soundOn)),
+    focusOver: useRef(new Audio(AUDIO_FILES.focusOver)),
+    breakOver: useRef(new Audio(AUDIO_FILES.breakOver)),
+    longBreakOver: useRef(new Audio(AUDIO_FILES.longBreakOver)),
+    longBreakReached: useRef(new Audio(AUDIO_FILES.longBreakReached)),
+    ticking: useRef(new Audio(AUDIO_FILES.ticking)),
+  };
 
+  // Update audio volumes
   useEffect(() => {
-    // side note: some audios were too loud, so I divided the volume
     const vol = volume / 100;
-    pauseSound.current.volume = vol;
-    unpauseSound.current.volume = vol;
-    timerEndSound.current.volume = vol;
-    resetSound.current.volume = vol / 4;
-    soundOnSound.current.volume = vol;
-    focusOverSound.current.volume = vol;
-    breakOverSound.current.volume = vol;
-    longBreakOverSound.current.volume = vol / 2;
-    longBreakReachedSound.current.volume = vol / 4;
-    tickingSound.current.volume = vol / 6;
-    localStorage.setItem(VOLUME_STORAGE_KEY, volume.toString());
+    Object.values(audio).forEach((audioRef) => {
+      audioRef.current.volume = vol;
+    });
+    // Adjust specific volumes
+    audio.reset.current.volume = vol / 4;
+    audio.longBreakReached.current.volume = vol / 4;
+    audio.ticking.current.volume = vol / 6;
+
+    localStorage.setItem(STORAGE_KEYS.VOLUME, volume.toString());
   }, [volume]);
 
+  // Timer interval effect
   useEffect(() => {
     if (isPlaying) {
       intervalRef.current = window.setInterval(() => {
@@ -91,102 +107,66 @@ export function useInterva() {
     };
   }, [isPlaying]);
 
-  // --- Persist timer state to localStorage ---
-  // Only load from localStorage on mount if there is a saved state AND the settings match
+  // Persist state to localStorage
   useEffect(() => {
-    const storedSettings = localStorage.getItem("interva-settings");
     const currentSettings = JSON.stringify({
       focusTime,
       breakTime,
       longBreakTime,
       rounds,
     });
-    if (storedSettings === currentSettings) {
-      const storedTimeLeft = localStorage.getItem("interva-timeLeft");
-      const storedCurrentRound = localStorage.getItem("interva-currentRound");
-      const storedTimerState = localStorage.getItem("interva-timerState");
+    localStorage.setItem(STORAGE_KEYS.SETTINGS, currentSettings);
+    localStorage.setItem(STORAGE_KEYS.TIME_LEFT, String(timeLeft));
+    localStorage.setItem(STORAGE_KEYS.CURRENT_ROUND, String(currentRound));
+    localStorage.setItem(STORAGE_KEYS.TIMER_STATE, timerState);
+  }, [
+    timeLeft,
+    currentRound,
+    timerState,
+    focusTime,
+    breakTime,
+    longBreakTime,
+    rounds,
+  ]);
 
-      if (storedTimeLeft && !isNaN(Number(storedTimeLeft)))
-        setTimeLeft(Number(storedTimeLeft));
-      if (storedCurrentRound && !isNaN(Number(storedCurrentRound)))
-        setCurrentRound(Number(storedCurrentRound));
-      if (
-        storedTimerState === "FOCUS" ||
-        storedTimerState === "SHORT_BREAK" ||
-        storedTimerState === "LONG_BREAK"
-      ) {
-        setTimerState(storedTimerState);
-      }
-    } else {
-      // If settings changed, reset timer
-      setTimeLeft(focusTime * 60);
-      setCurrentRound(1);
-      setTimerState("FOCUS");
-      localStorage.removeItem("interva-timeLeft");
-      localStorage.removeItem("interva-currentRound");
-      localStorage.removeItem("interva-timerState");
-      localStorage.setItem("interva-settings", currentSettings);
-    }
-  }, [focusTime, breakTime, longBreakTime, rounds]);
-
-  // Reset timer state in localStorage and in state if the context values change (e.g. user changes focus/break/rounds in settings)
+  // Reset timer when settings change
   useEffect(() => {
     setTimeLeft(focusTime * 60);
     setCurrentRound(1);
-    setTimerState("FOCUS");
-    localStorage.removeItem("interva-timeLeft");
-    localStorage.removeItem("interva-currentRound");
-    localStorage.removeItem("interva-timerState");
-  }, [focusTime, breakTime, longBreakTime, rounds]);
-
-  // Save to localStorage when changed
-  useEffect(() => {
-    localStorage.setItem("interva-timeLeft", String(timeLeft));
-  }, [timeLeft]);
-  useEffect(() => {
-    localStorage.setItem("interva-currentRound", String(currentRound));
-  }, [currentRound]);
-  useEffect(() => {
-    localStorage.setItem("interva-timerState", timerState);
-  }, [timerState]);
-  useEffect(() => {
-    localStorage.setItem(
-      "interva-settings",
-      JSON.stringify({ focusTime, breakTime, longBreakTime, rounds })
-    );
+    setTimerState(TimerState.FOCUS);
   }, [focusTime, breakTime, longBreakTime, rounds]);
 
   function handleTimerComplete() {
     setIsPlaying(false);
 
-    if (timerState === "FOCUS") {
+    if (timerState === TimerState.FOCUS) {
       if (currentRound === rounds) {
-        longBreakReachedSound.current.currentTime = 0.2;
-        longBreakReachedSound.current.play();
-        setTimerState("LONG_BREAK");
+        audio.longBreakReached.current.currentTime = 0.2;
+        audio.longBreakReached.current.play();
+        setTimerState(TimerState.LONG_BREAK);
         setTimeLeft(longBreakTime * 60);
       } else {
-        focusOverSound.current.currentTime = 0.2;
-        focusOverSound.current.play();
-        setTimerState("SHORT_BREAK");
+        audio.focusOver.current.currentTime = 0.2;
+        audio.focusOver.current.play();
+        setTimerState(TimerState.SHORT_BREAK);
         setTimeLeft(breakTime * 60);
       }
     } else {
-      if (timerState === "LONG_BREAK") {
+      if (timerState === TimerState.LONG_BREAK) {
         setCurrentRound(1);
-        longBreakOverSound.current.currentTime = 0.2;
-        longBreakOverSound.current.play();
+        audio.longBreakOver.current.currentTime = 0.2;
+        audio.longBreakOver.current.play();
       } else {
-        breakOverSound.current.currentTime = 0.1;
-        breakOverSound.current.play();
+        audio.breakOver.current.currentTime = 0.1;
+        audio.breakOver.current.play();
         setCurrentRound((round) => round + 1);
       }
-      setTimerState("FOCUS");
+      setTimerState(TimerState.FOCUS);
       setTimeLeft(focusTime * 60);
     }
 
     // Auto-start the next timer only if we haven't just completed a long break
-    if (timerState !== "LONG_BREAK") {
+    if (timerState !== TimerState.LONG_BREAK) {
       setTimeout(() => {
         setIsPlaying(true);
       }, 1000);
@@ -214,8 +194,8 @@ export function useInterva() {
   function handleVolumeClick() {
     if (volume === 0) {
       setVolume(100);
-      soundOnSound.current.currentTime = 0.15;
-      soundOnSound.current.play();
+      audio.soundOn.current.currentTime = 0.15;
+      audio.soundOn.current.play();
     } else {
       setVolume(0);
     }
@@ -225,11 +205,11 @@ export function useInterva() {
     setIsPlaying((prev) => {
       const next = !prev;
       if (next) {
-        unpauseSound.current.currentTime = 0.2;
-        unpauseSound.current.play();
+        audio.unpause.current.currentTime = 0.2;
+        audio.unpause.current.play();
       } else {
-        pauseSound.current.currentTime = 0.2;
-        pauseSound.current.play();
+        audio.pause.current.currentTime = 0.2;
+        audio.pause.current.play();
       }
       return next;
     });
@@ -242,16 +222,16 @@ export function useInterva() {
   function handleReset() {
     setIsPlaying(false);
     setCurrentRound(1);
-    setTimerState("FOCUS");
+    setTimerState(TimerState.FOCUS);
     setTimeLeft(focusTime * 60);
-    resetSound.current.currentTime = 0.025;
-    resetSound.current.play();
+    audio.reset.current.currentTime = 0.025;
+    audio.reset.current.play();
   }
 
   function handleVolumeChange(e: React.ChangeEvent<HTMLInputElement>) {
     setVolume(+e.target.value);
-    soundOnSound.current.currentTime = 0;
-    soundOnSound.current.play();
+    audio.soundOn.current.currentTime = 0;
+    audio.soundOn.current.play();
   }
 
   // Calculate hours, minutes, and seconds
@@ -261,17 +241,17 @@ export function useInterva() {
 
   useEffect(() => {
     if (isPlaying && tickingEnabled) {
-      tickingSound.current.loop = true;
-      tickingSound.current.currentTime = 0.6;
-      tickingSound.current.play();
+      audio.ticking.current.loop = true;
+      audio.ticking.current.currentTime = 0.6;
+      audio.ticking.current.play();
     } else {
-      tickingSound.current.pause();
-      tickingSound.current.currentTime = 0;
+      audio.ticking.current.pause();
+      audio.ticking.current.currentTime = 0;
     }
 
     return () => {
-      tickingSound.current.pause();
-      tickingSound.current.currentTime = 0;
+      audio.ticking.current.pause();
+      audio.ticking.current.currentTime = 0;
     };
   }, [isPlaying, tickingEnabled]);
 
