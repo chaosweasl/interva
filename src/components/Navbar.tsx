@@ -34,14 +34,10 @@ export default function Navbar() {
     >
       <div data-tauri-drag-region className="navbar-start">
         <div className="dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-sm btn-ghost btn-circle"
-          >
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -73,8 +69,8 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <Link to="/settings" className="btn btn-sm btn-ghost btn-circle">
-          <Settings2 className="w-5 h-5" />
+        <Link to="/settings" className="btn btn-ghost btn-circle">
+          <Settings2 className="w-6 h-6" />
         </Link>
       </div>
       <div data-tauri-drag-region className="navbar-center">
@@ -84,10 +80,7 @@ export default function Navbar() {
       </div>
       <div data-tauri-drag-region className="navbar-end">
         <div className="tooltip tooltip-bottom" data-tip="Pin to top">
-          <button
-            onClick={togglePin}
-            className="btn btn-sm btn-ghost btn-circle"
-          >
+          <button onClick={togglePin} className="btn btn-ghost btn-circle">
             {isPinned ? (
               <PinOff className="w-5 h-5" />
             ) : (
@@ -96,14 +89,11 @@ export default function Navbar() {
           </button>
         </div>
 
-        <button
-          onClick={minimizeApp}
-          className="btn btn-sm btn-ghost btn-circle"
-        >
+        <button onClick={minimizeApp} className="btn btn-ghost btn-circle">
           <Minus />
         </button>
 
-        <button onClick={closeApp} className="btn btn-sm btn-ghost btn-circle">
+        <button onClick={closeApp} className="btn btn-ghost btn-circle">
           <X />
         </button>
       </div>
