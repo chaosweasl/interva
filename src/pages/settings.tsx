@@ -122,7 +122,7 @@ export default function Settings() {
             </h1>
 
             <fieldset>
-              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-neutral badge-soft">
+              <div className="flex justify-center items-center w-15 h-6 text-center badge badge-neutral">
                 {rounds}
               </div>
             </fieldset>
@@ -141,8 +141,11 @@ export default function Settings() {
               </div>
             </div>
           </li>
+          <div className="flex justify-center items-center w-full mt-5 mb-5">
+            <label className="text-lg font-semibold">App Settings</label>
+          </div>
           <li>
-            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-4">
+            <fieldset className="fieldset bg-base-100 border-base-300 rounded-box w-full border p-3">
               <label className="label cursor-pointer">
                 <span className="label-text">Open on Startup</span>
                 <input
@@ -155,7 +158,7 @@ export default function Settings() {
             </fieldset>
             <button
               onClick={resetToDefaults}
-              className="btn btn-ghost btn-sm normal-case flex justify-center items-center w-full"
+              className="btn btn-ghost btn-sm normal-case flex justify-center items-center w-full mt-2"
             >
               Reset to defaults
             </button>

@@ -42,10 +42,9 @@ export default function Themes() {
   const { theme, setTheme } = usePomodoroSettings();
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-base-100 p-8">
-      <div className="w-full max-w-5xl">
-        <h1 className="text-2xl font-bold mb-8 text-center">Choose a Theme</h1>
-        <div className="grid grid-cols-2 gap-8">
+    <div className="flex flex-col items-center min-h-screen bg-base-100 p-8 mt-12">
+      <div className="w-full">
+        <div className="grid grid-cols-2 gap-5">
           {themes.map((t) => (
             <button
               key={t}
@@ -57,25 +56,17 @@ export default function Themes() {
               }`}
               aria-label={`Select ${t} theme`}
             >
-              <div className="w-full aspect-video bg-base-200 flex items-center justify-center rounded mb-3 overflow-hidden">
+              <div className="w-full h-full bg-base-200 flex items-center justify-center rounded mb-3">
                 {/* Replace src with your own theme preview images, e.g. /themes/dark.png */}
                 <img
                   src={`/themes/${t}.png`}
                   alt={`${t} theme preview`}
                   className="object-cover w-full h-full"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.opacity = "0.2";
-                  }}
                 />
               </div>
               <span className="text-base font-medium capitalize text-base-content">
                 {t}
               </span>
-              {theme === t && (
-                <span className="mt-1 text-xs text-primary font-semibold">
-                  Selected
-                </span>
-              )}
             </button>
           ))}
         </div>

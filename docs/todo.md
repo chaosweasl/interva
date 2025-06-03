@@ -3,6 +3,7 @@
 - learn how useEffect and useMemo works
 - practice rustlings
 - polish frontend
+- add animations
 <!-- - double check that daisyUI colors are applied -->
 
 ## interva
