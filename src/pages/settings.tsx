@@ -35,14 +35,8 @@ export default function Settings() {
   return (
     <div className="flex flex-col justify-between items-center min-h-screen bg-base-100">
       <div className="flex flex-col items-center w-full h-full p-5 pt-15 pb-10">
-        <div className="flex justify-between items-center w-full mb-4">
+        <div className="flex justify-center items-center w-full mb-4">
           <label className="text-lg font-semibold">Pomodoro Settings</label>
-          <button
-            onClick={resetToDefaults}
-            className="btn btn-ghost btn-sm normal-case"
-          >
-            Reset to defaults
-          </button>
         </div>
         <ul className="w-full gap-1 flex flex-col">
           <li className="flex justify-center items-center flex-col gap-1">
@@ -159,6 +153,12 @@ export default function Settings() {
                 />
               </label>
             </fieldset>
+            <button
+              onClick={resetToDefaults}
+              className="btn btn-ghost btn-sm normal-case flex justify-center items-center w-full"
+            >
+              Reset to defaults
+            </button>
           </li>
         </ul>
       </div>

@@ -1,7 +1,85 @@
-export default function themes() {
+import { usePomodoroSettings } from "../context/PomodoroSettingsContext";
+
+const themes = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+  "dim",
+  "nord",
+  "sunset",
+  "caramellatte",
+  "abyss",
+  "silk",
+];
+
+export default function Themes() {
+  const { theme, setTheme } = usePomodoroSettings();
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 overflow-hidden">
-      <h1 className="text-4xl text-black">themes page</h1>
+    <div className="flex flex-col items-center min-h-screen bg-base-100 p-8">
+      <div className="w-full max-w-5xl">
+        <h1 className="text-2xl font-bold mb-8 text-center">Choose a Theme</h1>
+        <div className="grid grid-cols-2 gap-8">
+          {themes.map((t) => (
+            <button
+              key={t}
+              onClick={() => setTheme(t)}
+              className={`flex flex-col items-center rounded-lg border-2 transition-all duration-200 shadow-md p-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/60 ${
+                theme === t
+                  ? "border-primary ring-2 ring-primary/60"
+                  : "border-base-200"
+              }`}
+              aria-label={`Select ${t} theme`}
+            >
+              <div className="w-full aspect-video bg-base-200 flex items-center justify-center rounded mb-3 overflow-hidden">
+                {/* Replace src with your own theme preview images, e.g. /themes/dark.png */}
+                <img
+                  src={`/themes/${t}.png`}
+                  alt={`${t} theme preview`}
+                  className="object-cover w-full h-full"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.opacity = "0.2";
+                  }}
+                />
+              </div>
+              <span className="text-base font-medium capitalize text-base-content">
+                {t}
+              </span>
+              {theme === t && (
+                <span className="mt-1 text-xs text-primary font-semibold">
+                  Selected
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

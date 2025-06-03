@@ -13,13 +13,15 @@ type PomodoroSettings = {
   breakTime: number;
   longBreakTime: number;
   rounds: number;
-  autoStart: boolean; // Make sure this matches
+  autoStart: boolean;
+  theme: string;
   setFocusTime: (value: number) => void;
   setBreakTime: (value: number) => void;
   setLongBreakTime: (value: number) => void;
   setRounds: (value: number) => void;
+  setTheme: (theme: string) => void;
   toggleAutoStart: () => Promise<void>;
-  resetToDefaults: () => void; // Add to type definition
+  resetToDefaults: () => void;
 };
 
 const PomodoroSettingsContext = createContext<PomodoroSettings | undefined>(
@@ -37,12 +39,17 @@ export const PomodoroSettingsProvider = ({
   const DEFAULT_LONG_BREAK_TIME = 15;
   const DEFAULT_ROUNDS = 4;
   const DEFAULT_STARTUP = false;
+  const DEFAULT_THEME = "dark";
 
   const [focusTime, setFocusTime] = useState(DEFAULT_FOCUS_TIME);
   const [breakTime, setBreakTime] = useState(DEFAULT_BREAK_TIME);
   const [longBreakTime, setLongBreakTime] = useState(DEFAULT_LONG_BREAK_TIME);
   const [rounds, setRounds] = useState(DEFAULT_ROUNDS);
   const [autoStart, setAutoStart] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    const storedTheme = localStorage.getItem("theme");
+    return storedTheme || DEFAULT_THEME;
+  });
 
   // Load timer state from localStorage on mount
   useEffect(() => {
@@ -74,6 +81,10 @@ export const PomodoroSettingsProvider = ({
   useEffect(() => {
     localStorage.setItem("autoStart", JSON.stringify(autoStart));
   }, [autoStart]);
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   // Check initial autostart status on mount
   useEffect(() => {
@@ -109,6 +120,7 @@ export const PomodoroSettingsProvider = ({
     setLongBreakTime(DEFAULT_LONG_BREAK_TIME);
     setRounds(DEFAULT_ROUNDS);
     setAutoStart(DEFAULT_STARTUP);
+    setTheme(DEFAULT_THEME);
   };
 
   return (
@@ -119,10 +131,12 @@ export const PomodoroSettingsProvider = ({
         longBreakTime,
         rounds,
         autoStart,
+        theme,
         setFocusTime,
         setBreakTime,
         setLongBreakTime,
         setRounds,
+        setTheme,
         toggleAutoStart,
         resetToDefaults,
       }}
