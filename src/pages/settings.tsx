@@ -17,21 +17,37 @@ export default function Settings() {
     resetToDefaults,
   } = usePomodoroSettings();
 
+  // Clear timer state in localStorage when settings change
+  const clearTimerState = () => {
+    localStorage.removeItem("interva-timeLeft");
+    localStorage.removeItem("interva-currentRound");
+    localStorage.removeItem("interva-timerState");
+  };
+
   // Handler to reset rounds when focus time changes
   const handleFocusChange = (value: number) => {
     setFocusTime(value);
+    clearTimerState();
   };
 
   const handleBreakChange = (value: number) => {
     setBreakTime(value);
+    clearTimerState();
   };
 
   const handleLongBreakChange = (value: number) => {
     setLongBreakTime(value);
+    clearTimerState();
   };
 
   const handleRoundsChange = (value: number) => {
     setRounds(value);
+    clearTimerState();
+  };
+
+  const handleResetToDefaults = () => {
+    resetToDefaults();
+    clearTimerState();
   };
 
   return (
@@ -42,7 +58,7 @@ export default function Settings() {
           <div className="flex justify-between items-center w-full mb-6">
             <h2 className="text-xl font-bold">Timer Settings</h2>
             <button
-              onClick={resetToDefaults}
+              onClick={handleResetToDefaults}
               className="btn btn-ghost btn-sm gap-2"
             >
               <svg
