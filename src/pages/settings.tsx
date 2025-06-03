@@ -7,11 +7,13 @@ export default function Settings() {
     longBreakTime,
     rounds,
     autoStart,
+    tickingEnabled,
     setFocusTime,
     setBreakTime,
     setLongBreakTime,
     setRounds,
     toggleAutoStart,
+    setTickingEnabled,
     resetToDefaults,
   } = usePomodoroSettings();
 
@@ -170,13 +172,22 @@ export default function Settings() {
         <div className="w-full mt-8">
           <h2 className="text-xl font-bold mb-4">App Settings</h2>
           <div className="card bg-base-200">
-            <div className="card-body p-4">
+            <div className="card-body p-4 space-y-4">
               <label className="flex cursor-pointer gap-4">
                 <span className="flex-1">Open on Startup</span>
                 <input
                   type="checkbox"
                   checked={autoStart}
                   onChange={toggleAutoStart}
+                  className="toggle toggle-primary"
+                />
+              </label>
+              <label className="flex cursor-pointer gap-4">
+                <span className="flex-1">Ticking Sound</span>
+                <input
+                  type="checkbox"
+                  checked={tickingEnabled}
+                  onChange={(e) => setTickingEnabled(e.target.checked)}
                   className="toggle toggle-primary"
                 />
               </label>

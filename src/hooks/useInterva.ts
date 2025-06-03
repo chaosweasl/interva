@@ -4,7 +4,8 @@ import { usePomodoroSettings } from "../context/PomodoroSettingsContext";
 const VOLUME_STORAGE_KEY = "interva-volume";
 
 export function useInterva() {
-  const { focusTime, breakTime, longBreakTime, rounds } = usePomodoroSettings();
+  const { focusTime, breakTime, longBreakTime, rounds, tickingEnabled } =
+    usePomodoroSettings();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(() => {
@@ -48,7 +49,7 @@ export function useInterva() {
   const longBreakReachedSound = useRef(
     new Audio("/sounds/longBreakReached.mp3")
   );
-  const tickingSound = useRef(new Audio("/sounds/ticking.mp3"));
+  const tickingSound = useRef(new Audio("/sounds/ticking.flac"));
 
   useEffect(() => {
     // side note: some audios were too loud, so I divided the volume
@@ -62,7 +63,7 @@ export function useInterva() {
     breakOverSound.current.volume = vol;
     longBreakOverSound.current.volume = vol / 2;
     longBreakReachedSound.current.volume = vol / 4;
-    tickingSound.current.volume = vol;
+    tickingSound.current.volume = vol / 6;
     localStorage.setItem(VOLUME_STORAGE_KEY, volume.toString());
   }, [volume]);
 
@@ -257,6 +258,22 @@ export function useInterva() {
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
+
+  useEffect(() => {
+    if (isPlaying && tickingEnabled) {
+      tickingSound.current.loop = true;
+      tickingSound.current.currentTime = 0.6;
+      tickingSound.current.play();
+    } else {
+      tickingSound.current.pause();
+      tickingSound.current.currentTime = 0;
+    }
+
+    return () => {
+      tickingSound.current.pause();
+      tickingSound.current.currentTime = 0;
+    };
+  }, [isPlaying, tickingEnabled]);
 
   return {
     isPlaying,

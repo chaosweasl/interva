@@ -15,6 +15,7 @@ type PomodoroSettings = {
   rounds: number;
   autoStart: boolean;
   theme: string;
+  tickingEnabled: boolean;
   setFocusTime: (value: number) => void;
   setBreakTime: (value: number) => void;
   setLongBreakTime: (value: number) => void;
@@ -22,6 +23,7 @@ type PomodoroSettings = {
   setTheme: (theme: string) => void;
   toggleAutoStart: () => Promise<void>;
   resetToDefaults: () => void;
+  setTickingEnabled: (enabled: boolean) => void;
 };
 
 const PomodoroSettingsContext = createContext<PomodoroSettings | undefined>(
@@ -40,6 +42,7 @@ export const PomodoroSettingsProvider = ({
   const DEFAULT_ROUNDS = 4;
   const DEFAULT_STARTUP = false;
   const DEFAULT_THEME = "dark";
+  const DEFAULT_TICKING_ENABLED = true;
 
   const [focusTime, setFocusTime] = useState(DEFAULT_FOCUS_TIME);
   const [breakTime, setBreakTime] = useState(DEFAULT_BREAK_TIME);
@@ -49,6 +52,10 @@ export const PomodoroSettingsProvider = ({
   const [theme, setTheme] = useState(() => {
     const storedTheme = localStorage.getItem("theme");
     return storedTheme || DEFAULT_THEME;
+  });
+  const [tickingEnabled, setTickingEnabled] = useState(() => {
+    const stored = localStorage.getItem("tickingEnabled");
+    return stored ? JSON.parse(stored) : DEFAULT_TICKING_ENABLED;
   });
 
   // Load timer state from localStorage on mount
@@ -85,6 +92,9 @@ export const PomodoroSettingsProvider = ({
     localStorage.setItem("theme", theme);
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+  useEffect(() => {
+    localStorage.setItem("tickingEnabled", JSON.stringify(tickingEnabled));
+  }, [tickingEnabled]);
 
   // Check initial autostart status on mount
   useEffect(() => {
@@ -131,6 +141,7 @@ export const PomodoroSettingsProvider = ({
         rounds,
         autoStart,
         theme,
+        tickingEnabled,
         setFocusTime,
         setBreakTime,
         setLongBreakTime,
@@ -138,6 +149,7 @@ export const PomodoroSettingsProvider = ({
         setTheme,
         toggleAutoStart,
         resetToDefaults,
+        setTickingEnabled,
       }}
     >
       {children}
