@@ -65,12 +65,24 @@ export const PomodoroSettingsProvider = ({
     const storedLongBreak = localStorage.getItem("longBreakTime");
     const storedRounds = localStorage.getItem("rounds");
     const storedAutoStart = localStorage.getItem("autoStart");
-    if (storedFocus) setFocusTime(Number(storedFocus));
-    if (storedBreakTime) setBreakTime(Number(storedBreakTime));
-    if (storedLongBreak) setLongBreakTime(Number(storedLongBreak));
-    if (storedRounds) setRounds(Number(storedRounds));
-    if (storedAutoStart) setAutoStart(JSON.parse(storedAutoStart));
-  }, []);
+
+    // Only update if values are different from current state
+    if (storedFocus && Number(storedFocus) !== focusTime) {
+      setFocusTime(Number(storedFocus));
+    }
+    if (storedBreakTime && Number(storedBreakTime) !== breakTime) {
+      setBreakTime(Number(storedBreakTime));
+    }
+    if (storedLongBreak && Number(storedLongBreak) !== longBreakTime) {
+      setLongBreakTime(Number(storedLongBreak));
+    }
+    if (storedRounds && Number(storedRounds) !== rounds) {
+      setRounds(Number(storedRounds));
+    }
+    if (storedAutoStart) {
+      setAutoStart(JSON.parse(storedAutoStart));
+    }
+  }, []); // Only run on mount
 
   // Save timer state to localStorage when changed
   useEffect(() => {
