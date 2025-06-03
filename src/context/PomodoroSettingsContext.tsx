@@ -120,7 +120,6 @@ export const PomodoroSettingsProvider = ({
     setLongBreakTime(DEFAULT_LONG_BREAK_TIME);
     setRounds(DEFAULT_ROUNDS);
     setAutoStart(DEFAULT_STARTUP);
-    setTheme(DEFAULT_THEME);
   };
 
   return (
