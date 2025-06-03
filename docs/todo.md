@@ -3,7 +3,7 @@
 - learn how useEffect and useMemo works
 - practice rustlings
 - polish frontend
-- double check that daisyUI colors are applied
+<!-- - double check that daisyUI colors are applied -->
 
 ## interva
 
@@ -18,8 +18,7 @@
 ## settings
 
 <!-- - add settings for changing pomo time -->
-
-- add settings for OS integration (e.g always on top, start up on launch, etc)
+<!-- - add settings for OS integration (e.g always on top, start up on launch, etc) -->
 
 ## about
 
