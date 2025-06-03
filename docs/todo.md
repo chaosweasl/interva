@@ -4,6 +4,7 @@
 - practice rustlings
 - polish frontend
 - add animations
+- !!! configure auto-updating !!!
 <!-- - double check that daisyUI colors are applied -->
 
 ## interva
