@@ -27,14 +27,11 @@
     "active": true,
     "targets": "all",
     "icon": [
-      "icons/icon.png",
-      "icons/icon-16x16.png",
-      "icons/icon-32x32.png",
-      "icons/icon-196x196.png",
-      "icons/icon-512x512.png",
-      "icons/icon-smaller.png",
-      "icons/icon.ico",
-      "icons/logo.png"
+      "icons/apple-touch-icon.png",
+      "icons/favicon-96x96.png",
+      "icons/favicon.ico",
+      "icons/web-app-manifest-192x192.png",
+      "icons/web-app-manifest-512x512.png"
     ]
   }
 }
