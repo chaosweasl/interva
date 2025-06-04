@@ -9,6 +9,10 @@ export default function about() {
     openUrl("https://ko-fi.com/chaosweasl");
   }
 
+  function handleGithub() {
+    openUrl("https://github.com/chaosweasl/interva");
+  }
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-base-100">
       <div className="flex flex-col items-center w-full max-w-2xl gap-8 h-full p-6 pt-8 pb-10 bg-base-200 rounded-xl shadow-lg mt-10 mb-10">
@@ -48,6 +52,12 @@ export default function about() {
           onClick={handleOpenForm}
         >
           Leave your feedback here!
+        </button>
+        <button
+          className="btn btn-secondary btn-wide shadow-md"
+          onClick={handleGithub}
+        >
+          Check out the project's repository here!
         </button>
       </div>
     </div>
