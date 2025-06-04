@@ -1,4 +1,14 @@
+import { openUrl } from "@tauri-apps/plugin-opener";
+
 export default function about() {
+  function handleOpenForm() {
+    openUrl("https://forms.gle/Tv8XvLxs8f98YtJ47");
+  }
+
+  function handleSupport() {
+    openUrl("https://ko-fi.com/chaosweasl");
+  }
+
   return (
     <div className="flex flex-col justify-between items-center min-h-screen bg-base-100">
       <div className="flex flex-col items-center w-full gap-10 h-full p-5 pt-16">
@@ -18,14 +28,18 @@ export default function about() {
           me know what you'd love to see in this project, I'd be more than happy
           to hear your suggestions!
         </p>
-        https://forms.gle/Tv8XvLxs8f98YtJ47
+        <button className="btn btn-ghost" onClick={handleOpenForm}>
+          Leave your feedback here!
+        </button>
         <p>
           Projects like these take a lot of time to make, and I don't make
           anything from them. I have a big dream of starting my own startup to
           help students study more efficiently - your contribution would be
           heart-melting to me. ❤️
         </p>
-        ko-fi link here
+        <button className="btn btn-ghost" onClick={handleSupport}>
+          Support me on Ko-Fi
+        </button>
       </div>
     </div>
   );
