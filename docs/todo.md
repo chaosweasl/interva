@@ -24,7 +24,7 @@
 
 ## about
 
-- add a ko-fi link
-- link the github repo to this project
-- talk briefly about project
-- link my github
+<!-- - add a ko-fi link -->
+<!-- - link the github repo to this project -->
+<!-- - talk briefly about project -->
+<!-- - link my github -->
