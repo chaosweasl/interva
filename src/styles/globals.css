@@ -8,7 +8,6 @@
 }
 
 :root {
-  /* overflow: hidden; */
   @apply select-none font-inter scrollbar-hide;
 }
 
