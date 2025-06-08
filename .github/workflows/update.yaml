@@ -1,9 +1,10 @@
-name: "Release"
+name: "Update"
 
 on:
   push:
-    tags:
-      - "v*"
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
 
 jobs:
   release:
@@ -31,6 +32,7 @@ jobs:
 
       - name: Get pnpm store directory
         id: pnpm-cache
+        shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
@@ -52,12 +54,17 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
+          TAURI_KEY_PASSWORD: ${{ secrets.TAURI_KEY_PASSWORD }}
         with:
-          tagName: ${{ github.ref_name }}
-          releaseName: "Interva ${{ github.ref_name }}"
+          tagName: app-v__VERSION__
+          releaseName: "Interva v__VERSION__"
           releaseBody: |
-            Changes in this release:
-            - First packaged release of Interva
+            See the assets to download and install this version.
+
+            **Changes in this update:**
+            - Bug fixes and improvements
+            - Application updates
 
             **Installation:**
             - Download the appropriate installer for your system
