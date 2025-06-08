@@ -16,7 +16,7 @@ export default function about() {
   return (
     <div className="flex flex-col items-center min-h-screen bg-base-100">
       <div className="flex flex-col items-center w-full max-w-2xl gap-8 h-full p-6 pt-8 pb-10 bg-base-200 rounded-xl shadow-lg mt-10 mb-10">
-        <h1 className="text-3xl font-bold text-primary">Ahoy there!!</h1>
+        <h1 className="text-3xl font-bold text-primary">Ahoy there!</h1>
         <h2 className="font-semibold text-secondary -mt-6">
           Thank you so much for using my app!
         </h2>
