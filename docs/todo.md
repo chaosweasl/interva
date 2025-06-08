@@ -5,8 +5,10 @@
 - polish frontend
 - add animations
 - add photos on ko-fi
-- !!! configure auto-updating !!!
-<!-- - double check that daisyUI colors are applied -->
+  <!-- - !!! configure auto-updating !!! -->
+  <!-- - double check that daisyUI colors are applied -->
+
+## CI/CD
 
 ## interva
 
