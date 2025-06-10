@@ -1,10 +1,18 @@
-name: "Update"
+name: "Release"
 
+# Reusable workflow configuration
 on:
   push:
     branches: ["master"]
+    tags: ["v*"]
   pull_request:
     branches: ["master"]
+  workflow_dispatch: # Allow manual triggering
+
+env:
+  ARTIFACT_NAME: interva
+  BINARY_PATH: src-tauri/target/release/interva.exe
+  MSI_PATH: src-tauri/target/release/bundle/msi/interva_*.msi
 
 jobs:
   release:
@@ -48,26 +56,49 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile # Extract version from package.json
+      - name: Get Version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "VERSION=v$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
+        id: tauri_build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
-          tagName: app-v__VERSION__
-          releaseName: "Interva v__VERSION__"
+          tagName: ${{ steps.version.outputs.VERSION }}
+          releaseName: "Interva ${{ steps.version.outputs.VERSION }}"
           releaseBody: |
-            See the assets to download and install this version.
-
-            **Changes in this update:**
-            - Bug fixes and improvements
-            - Application updates
-
             **Installation:**
             - Download the appropriate installer for your system
             - Run the installer
             - Enjoy your productive pomodoro sessions!
           releaseDraft: true
           prerelease: false
+
+      # Update latest.json with new version info
+      - name: Update latest.json
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          $version = "${{ steps.version.outputs.VERSION }}"
+          $content = Get-Content latest.json | ConvertFrom-Json
+          $content.version = $version
+          $content.platforms.'windows-x86_64'.url = "https://github.com/${{ github.repository }}/releases/download/$version/interva_$($version.substring(1))_x64_en-US.msi"
+          $content.platforms.'windows-x86_64'.signature = "https://github.com/${{ github.repository }}/releases/download/$version/interva_$($version.substring(1))_x64_en-US.msi.sig"
+          $content | ConvertTo-Json -Depth 10 | Set-Content latest.json -Encoding UTF8
+        shell: pwsh
+
+      # Commit and push updated latest.json
+      - name: Commit latest.json
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add latest.json
+          git commit -m "chore: Update latest.json for version ${{ steps.version.outputs.VERSION }}"
+          git push

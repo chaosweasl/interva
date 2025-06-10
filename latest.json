@@ -1,0 +1,11 @@
+{
+  "version": "v0.1.0",
+  "notes": "First release",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "https://github.com/chaosweasl/interva/releases/download/v0.1.0/interva_0.1.0_x64_en-US.msi.sig",
+      "url": "https://github.com/chaosweasl/interva/releases/download/v0.1.0/interva_0.1.0_x64_en-US.msi",
+      "bin": "interva.exe"
+    }
+  }
+}
