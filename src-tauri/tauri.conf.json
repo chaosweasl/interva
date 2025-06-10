@@ -25,7 +25,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["app", "appimage", "msi"],
     "icon": [
       "icons/apple-touch-icon.png",
       "icons/favicon-96x96.png",
