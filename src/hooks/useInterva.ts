@@ -240,18 +240,25 @@ export function useInterva() {
   const hours = Math.floor(timeLeft / 3600);
   const minutes = Math.floor((timeLeft % 3600) / 60);
   const seconds = timeLeft % 60;
-
   useEffect(() => {
+    let tickingTimeout: number;
+
     if (isPlaying && tickingEnabled) {
-      audio.ticking.current.loop = true;
-      audio.ticking.current.currentTime = 0.6;
-      audio.ticking.current.play();
+      // Delay the start of ticking by 1 second to sync with the timer
+      tickingTimeout = window.setTimeout(() => {
+        audio.ticking.current.loop = true;
+        audio.ticking.current.currentTime = 0;
+        audio.ticking.current.play();
+      }, 400);
     } else {
       audio.ticking.current.pause();
       audio.ticking.current.currentTime = 0;
     }
 
     return () => {
+      if (tickingTimeout) {
+        clearTimeout(tickingTimeout);
+      }
       audio.ticking.current.pause();
       audio.ticking.current.currentTime = 0;
     };
