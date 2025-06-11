@@ -19,12 +19,11 @@ Whether you're a student who has trouble focusing on their work, a r
 
 # Download Link
 
-[here](https://github.com/chaosweasl/interva/releases/latest)
+You can download the app [here](https://github.com/chaosweasl/interva/releases/latest). Make sure you download the .msi file and not the .msi.sig one.
                         
 ## Authors
 
 - [@chaosweasl](https://github.com/chaosweasl)
-
 
 ## FAQ (for users)
 
