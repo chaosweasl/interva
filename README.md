@@ -62,19 +62,19 @@ i don't know, but it will be **in the near future** (possible for linux but I wo
 
 ### App Logo
 
-![Interva Logo](public/assets/intervalogo.svg)
+<img src="public/assets/intervalogo.svg" alt="Interva Logo" width="200"/>
 
 ### Main Timer Interface
 
-![Interva Main Interface](public/assets/interva.png)
+<img src="public/assets/interva.png" alt="Interva Main Interface" style="transform: scale(0.8);" />
 
 ### Theme Selection
 
-![Interva Themes](public/assets/intervathemes.png)
+<img src="public/assets/intervathemes.png" alt="Interva Themes" style="transform: scale(0.8);" />
 
 ### Settings Panel
 
-![Interva Settings](public/assets/intervasettings.png)
+<img src="public/assets/intervasettings.png" alt="Interva Settings" style="transform: scale(0.8);" />
 
 ## Support
 
