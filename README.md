@@ -1,4 +1,3 @@
-
 # Interva
 
 I've built this project as a modern, customizable Pomodoro timer application that can help anyone stay focused and maintain a healthy work-study rhythm with its sleek interface.
@@ -20,7 +19,7 @@ Whether you're a student who has trouble focusing on their work, a r
 # Download Link
 
 You can download the app [here](https://github.com/chaosweasl/interva/releases/latest). Make sure you download the .msi file and not the .msi.sig one.
-                        
+
 ## Authors
 
 - [@chaosweasl](https://github.com/chaosweasl)
@@ -32,12 +31,14 @@ You can download the app [here](https://github.com/chaosweasl/interva/releases/l
 The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
 
 ## Cozy design:
+
 - Distraction-Free Interface: A clean, minimal design that stays out of your way
 - Customization: Adjust focus time, break durations, and number of rounds to match your workflow
 - Visual Comfort: Choose from 35+ beautiful themes to match your setup or mood
 - Audio Cues: Gentle sound effects to signal transitions without being disruptive
 
 ## Smart Features:
+
 - Auto-start next sessions (configurable)
 - Optional ticking sound for ambient focus
 - Long break rewards after completing your rounds
@@ -59,9 +60,21 @@ i don't know, but it will be **in the near future** (possible for linux but I wo
 
 ## Screenshots
 
-[App Screenshots]
+### App Logo
 
+![Interva Logo](public/assets/intervalogo.svg)
 
+### Main Timer Interface
+
+![Interva Main Interface](public/assets/interva.png)
+
+### Theme Selection
+
+![Interva Themes](public/assets/intervathemes.png)
+
+### Settings Panel
+
+![Interva Settings](public/assets/intervasettings.png)
 
 ## Support
 
@@ -74,7 +87,6 @@ You can leave your feedback on [this Google Form](https://docs.google.com/forms/
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
 
 ---
 
@@ -91,9 +103,7 @@ Another challenge I faced was configuring the app to support specific OS-level b
 I also considered adding support for Linux and macOS, but those platforms require additional setup that I haven't tackled yet. In the case of macOS, I'd need a developer certificate from Apple and access to a macOS environment—which typically means owning a Mac or renting a macOS cloud instance, both of which aren't feasible for me right now.
 
 Overall, this project helped me push past a major fear: building and deploying a real-world app. Shipping something functional and available to users gave me a huge confidence boost.
+
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
-
-
-
