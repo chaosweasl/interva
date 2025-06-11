@@ -87,9 +87,12 @@ For support, you can find my email on [my Github profile](https://github.com/cha
 
 You can leave your feedback on [this Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdaQUubBlTNOk8SC8pRLVXGEYHR99KCq-QJsast49FR15m26g/viewform)
 
-## License
+## ☕ Supporting my work
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Projects like these take a lot of time to make, and I don't make anything from them. 
+I have a big dream of creating my own startup to help students study more efficiently - your contribution would be heart-melting to me. ❤️
+
+[Please support me on Ko-Fi!](https://ko-fi.com/chaosweasl)
 
 ---
 
@@ -110,3 +113,7 @@ Overall, this project helped me push past a major fear: building and deploying a
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
