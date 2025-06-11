@@ -63,18 +63,18 @@ i don't know, but it will be **in the near future** (possible for linux but I wo
 <table>
 <tr>
 <td align="center">
-    <img src="public/assets/intervalogo.svg" alt="Interva Logo" width="200"/>
+    <img src="public/assets/intervalogo.svg" alt="Interva Logo" width="300"/>
 </td>
 <td align="center">
-    <img src="public/assets/interva.png" alt="Interva Main Interface" style="transform: scale(0.7);" />
+    <img src="public/assets/interva.png" alt="Interva Main Interface" style="transform: scale(0.5);" />
 </td>
 </tr>
 <tr>
 <td align="center">
-    <img src="public/assets/intervathemes.png" alt="Interva Themes" style="transform: scale(0.7);" />
+    <img src="public/assets/intervathemes.png" alt="Interva Themes" style="transform: scale(0.5);" />
 </td>
 <td align="center">
-    <img src="public/assets/intervasettings.png" alt="Interva Settings" style="transform: scale(0.7);" />
+    <img src="public/assets/intervasettings.png" alt="Interva Settings" style="transform: scale(0.5);" />
 </td>
 </tr>
 </table>
