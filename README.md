@@ -17,6 +17,9 @@ Whether you're a student who has trouble focusing on their work, a r
 - 🖥️ Lightweight Desktop App
 - 🔄 Auto Updates
 
+# Download Link
+
+[here](https://github.com/chaosweasl/interva/releases/latest)
                         
 ## Authors
 
@@ -25,23 +28,23 @@ Whether you're a student who has trouble focusing on their work, a r
 
 ## FAQ (for users)
 
-#### What's the point of this application?
+### What's the point of this application?
 
 The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
 
-### Cozy design:
+## Cozy design:
 - Distraction-Free Interface: A clean, minimal design that stays out of your way
 - Customization: Adjust focus time, break durations, and number of rounds to match your workflow
 - Visual Comfort: Choose from 35+ beautiful themes to match your setup or mood
 - Audio Cues: Gentle sound effects to signal transitions without being disruptive
 
-### Smart Features:
+## Smart Features:
 - Auto-start next sessions (configurable)
 - Optional ticking sound for ambient focus
 - Long break rewards after completing your rounds
 - Volume control for all sound effects
 
-#### How do I download the app?
+### How do I download the app?
 
 You go to this [link](https://github.com/chaosweasl/interva/releases/latest) and download the .msi **(NOT the .msi.sig!)** file to install the application.
 
