@@ -60,21 +60,28 @@ i don't know, but it will be **in the near future** (possible for linux but I wo
 
 ## Screenshots
 
-### App Logo
-
-<img src="public/assets/intervalogo.svg" alt="Interva Logo" width="200"/>
-
-### Main Timer Interface
-
-<img src="public/assets/interva.png" alt="Interva Main Interface" style="transform: scale(0.8);" />
-
-### Theme Selection
-
-<img src="public/assets/intervathemes.png" alt="Interva Themes" style="transform: scale(0.8);" />
-
-### Settings Panel
-
-<img src="public/assets/intervasettings.png" alt="Interva Settings" style="transform: scale(0.8);" />
+<table>
+<tr>
+<td align="center">
+    <strong>App Logo</strong><br>
+    <img src="public/assets/intervalogo.svg" alt="Interva Logo" width="200"/>
+</td>
+<td align="center">
+    <strong>Main Timer Interface</strong><br>
+    <img src="public/assets/interva.png" alt="Interva Main Interface" style="transform: scale(0.7);" />
+</td>
+</tr>
+<tr>
+<td align="center">
+    <strong>Theme Selection</strong><br>
+    <img src="public/assets/intervathemes.png" alt="Interva Themes" style="transform: scale(0.7);" />
+</td>
+<td align="center">
+    <strong>Settings Panel</strong><br>
+    <img src="public/assets/intervasettings.png" alt="Interva Settings" style="transform: scale(0.7);" />
+</td>
+</tr>
+</table>
 
 ## Support
 
