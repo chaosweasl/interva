@@ -52,11 +52,11 @@ As of now, this app is **only available on Windows**, hence why only a .msi down
 
 ### When will it be available for Linux and MacOS too?
 
-i don't know, but it will be **in the near future** (possible for linux but I won't do it right now, and for macOS I'd need a developer license)
+i don't know, but it will be **in the near future**. (It's possible for linux, however for macOS I'd need a developer license)
 
 ### What about Android and iOS?
 
-**NOT in the near future** (it's possible but requires money for developer licensing so I can publish it on the app stores)
+**NOT in the near future** (it's possible but I need money for developer licenses so I can publish it on the app stores)
 
 ## Screenshots
 
