@@ -38,6 +38,10 @@ To let Windows know it's trustworthy I need a code signing certificate which cos
 
 If you have this problem, try to disable some security settings for your browser. (Safe Browsing if you're using chrome) 
 
+### Windows defender tries to warn me about the app being a potential threat and won't let me run it. How do I go around this?
+
+Click on "more info" and then on "run anyway"
+
 ### What's the point of this application?
 
 The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
