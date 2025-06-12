@@ -70,11 +70,15 @@ As of now, this app is **only available on Windows**, hence why only a .msi down
 
 ### When will it be available for Linux and MacOS too?
 
-i don't know, but it will be **in the near future**. (It's possible for linux, however for macOS I'd need a developer license)
+Not for macOS, since I'd need a developer license, but it will be **in the near future** for Linux (Debian).
 
 ### What about Android and iOS?
 
-**NOT in the near future** (it's possible but I need money for developer licenses so I can publish it on the app stores)
+Not in the near future.
+
+### Will it be available on app stores?
+
+No. It costs money. I don't have dabloons to spare. (although it might happen if you donate on my Ko-Fi :D)
 
 ## Screenshots
 
