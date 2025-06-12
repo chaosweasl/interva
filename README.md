@@ -26,6 +26,10 @@ You can download the app [here](https://github.com/chaosweasl/interva/releases/l
 
 ## FAQ (for users)
 
+### Is it a virus?
+
+No. The app is fully open-source. You can check the code yourself if you don't take my word for it. 
+
 ### What's the point of this application?
 
 The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
