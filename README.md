@@ -30,7 +30,11 @@ You can download the app [here](https://github.com/chaosweasl/interva/releases/l
 
 No. The app is fully open-source. You can check the code yourself if you don't take my word for it. 
 
-### My browser flags the .msi file as a virus, what should I do to get around it? 
+### Why does my computer flag the app as a virus then? 
+
+To let Windows know it's trustworthy I need a code signing certificate which costs money :( 
+
+### My browser flags the .msi file as a virus and doesn't let me download it, what should I do to get around it? 
 
 If you have this problem, try to disable some security settings for your browser. (Safe Browsing if you're using chrome) 
 
