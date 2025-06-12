@@ -38,6 +38,8 @@ To let Windows know it's trustworthy I need a code signing certificate which cos
 
 If you have this problem, try to disable some security settings for your browser. (Safe Browsing if you're using chrome) 
 
+Additionally, if that doesn't work, you can also try turning off real-time protection from the Windows Antivirus.
+
 ### Windows defender tries to warn me about the app being a potential threat and won't let me run it. How do I go around this?
 
 Click on "more info" and then on "run anyway"
