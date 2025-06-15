@@ -139,6 +139,7 @@ Overall, this project helped me push past a major fear: building and deploying a
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
+### Vercel, Next.js, ShadCN (for the landing page)
 
 ## License
 
