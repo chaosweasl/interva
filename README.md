@@ -5,6 +5,8 @@ I've built this project as a modern, customizable Pomodoro timer appli
 Originally, this project was only going to be added to my portfolio for recruiters. However, after finishing the app, I decided to keep it open source and available for anyone to download.
 Whether you're a student who has trouble focusing on their work, a recruiter who's looking for hirees or you just want to test this app out and contribute to it, this is the place for you :)
 
+[https://interva-chaosweasl.vercel.app/](https://interva-chaosweasl.vercel.app/)
+
 # Features
 
 - 🎯 Customizable Focus & Break Timers
@@ -129,6 +131,8 @@ With no prior experience in CI/CD, I spent around 5–6 hours learning and confi
 Another challenge I faced was configuring the app to support specific OS-level behaviors, such as keeping the window always on top and building a custom draggable navbar instead of using the default title bar.
 
 I also considered adding support for Linux and macOS, but those platforms require additional setup that I haven't tackled yet. In the case of macOS, I'd need a developer certificate from Apple and access to a macOS environment—which typically means owning a Mac or renting a macOS cloud instance, both of which aren't feasible for me right now.
+
+I also managed to make a landing page for my app. I built it with Next.js and Vercel, and you can visit it [here](https://interva-chaosweasl.vercel.app/). Developing the landing page was surprisingly a lot easier than I expected initially. I also learned how to add stuff like robots.txt, sitemap.xml and metadata to fully optimise SEO.
 
 Overall, this project helped me push past a major fear: building and deploying a real-world app. Shipping something functional and available to users gave me a huge confidence boost.
 
