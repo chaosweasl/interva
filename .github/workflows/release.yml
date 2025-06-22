@@ -42,22 +42,17 @@ jobs:
               prerelease: false
             })
             return data.id
+      - name: Wait for GitHub release to be ready
+        run: sleep 10
 
   build-tauri:
     needs: create-release
+    permissions:
+      contents: write
     strategy:
-      fail-fast: false
       matrix:
-        include:
-          - platform: "windows-latest"
-            args: ""
-          - platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
-          - platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
-          - platform: "ubuntu-latest"
-            args: ""
-    runs-on: ${{ matrix.platform }}
+        os: [windows-latest, macos-latest, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
@@ -69,20 +64,17 @@ jobs:
 
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
-        with:
-          # Only set targets for macOS runners
-          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
-
-      - name: install dependencies (ubuntu only)
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: setup pnpm
         uses: pnpm/action-setup@v2
         with:
           version: latest
+
+      - name: install dependencies (ubuntu only)
+        if: matrix.os == 'ubuntu-24.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
 
       - name: install frontend dependencies
         run: pnpm install
@@ -94,7 +86,3 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
-          args: ${{ matrix.args }}
-
-      - name: Wait for GitHub release to be ready
-        run: sleep 10
