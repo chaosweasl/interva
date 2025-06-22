@@ -63,6 +63,10 @@ jobs:
         with:
           node-version: 20
 
+      - name: Add Rust target (macOS only)
+        if: matrix.platform == 'macos-latest'
+        run: rustup target add ${{ matrix.args == '--target x86_64-apple-darwin' && 'x86_64-apple-darwin' || 'aarch64-apple-darwin' }}
+
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
