@@ -46,9 +46,7 @@ jobs:
       matrix:
         include:
           - platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
-          - platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
+            args: "--target universal-apple-darwin"
           - platform: "ubuntu-24.04"
             args: ""
           - platform: "windows-latest"
@@ -89,3 +87,4 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
+          args: ${{ matrix.args }}
