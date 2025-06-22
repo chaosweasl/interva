@@ -7,6 +7,10 @@ Whether you're a student who has trouble focusing on their work, a r
 
 [https://interva-chaosweasl.vercel.app/](https://interva-chaosweasl.vercel.app/)
 
+## Authors
+
+- [@chaosweasl](https://github.com/chaosweasl)
+
 # Features
 
 - 🎯 Customizable Focus & Break Timers
@@ -18,69 +22,35 @@ Whether you're a student who has trouble focusing on their work, a r
 - 🖥️ Lightweight Desktop App
 - 🔄 Auto Updates
 
-# Download Link
+---
 
-You can download the app [here](https://github.com/chaosweasl/interva/releases/latest). Make sure you download the .msi file and not the .msi.sig one.
+## Download
 
-## Authors
+You can download the latest version of Interva from the [GitHub Releases page](https://github.com/chaosweasl/interva/releases/latest).
 
-- [@chaosweasl](https://github.com/chaosweasl)
+### Windows
 
-## FAQ (for users)
+- `.msi` installer
 
-### Is it a virus?
+### macOS
 
-No. The app is fully open-source. You can check the code yourself if you don't take my word for it. 
+- `.dmg` disk image
 
-### Why does my computer flag the app as a virus then? 
+### Linux
 
-To let Windows know it's trustworthy I need a code signing certificate which costs money :( 
+- `.AppImage` executable
 
-### My browser flags the .msi file as a virus and doesn't let me download it, what should I do to get around it? 
+---
 
-If you have this problem, try to disable some security settings for your browser. (Safe Browsing if you're using chrome) 
+## Installation via Winget
 
-Additionally, if that doesn't work, you can also try turning off real-time protection from the Windows Antivirus.
+For Windows users, you can install Interva using [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/):
 
-### Windows defender tries to warn me about the app being a potential threat and won't let me run it. How do I go around this?
+```bash
+winget install chaosweasl.interva
+```
 
-Click on "more info" and then on "run anyway"
-
-### What's the point of this application?
-
-The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
-
-## Cozy design:
-
-- Distraction-Free Interface: A clean, minimal design that stays out of your way
-- Customization: Adjust focus time, break durations, and number of rounds to match your workflow
-- Visual Comfort: Choose from 35+ beautiful themes to match your setup or mood
-- Audio Cues: Gentle sound effects to signal transitions without being disruptive
-
-## Smart Features:
-
-- Auto-start next sessions (configurable)
-- Optional ticking sound for ambient focus
-- Long break rewards after completing your rounds
-- Volume control for all sound effects
-
-### How do I download the app?
-
-You go to this [link](https://github.com/chaosweasl/interva/releases/latest) and download the .msi **(NOT the .msi.sig!)** file to install the application.
-
-As of now, this app is **only available on Windows**, hence why only a .msi download file is available.
-
-### When will it be available for Linux and MacOS too?
-
-Not for macOS, since I'd need a developer license, but it will be **in the near future** for Linux (Debian).
-
-### What about Android and iOS?
-
-Not in the near future.
-
-### Will it be available on app stores?
-
-No. It costs money. I don't have dabloons to spare. (although it might happen if you donate on my Ko-Fi :D)
+---
 
 ## Screenshots
 
@@ -103,13 +73,81 @@ No. It costs money. I don't have dabloons to spare. (although it might happen if
 </tr>
 </table>
 
+---
+
+## FAQ
+
+**Is it a virus?**
+
+No. The app is fully open-source. You can check the code yourself if you don't take my word for it.
+
+**Why does my computer flag the app as a virus then?**
+
+I need a code signing certificate for Windows and macOS, which costs money. :(
+
+**My browser flags the `.msi` file as a virus and doesn't let me download it, what should I do?**
+
+Try disabling some security settings in your browser (e.g., Safe Browsing in Chrome). If that doesn't work, you can also try turning off real-time protection in your antivirus temporarily.
+
+**Windows Defender warns me about the app being a potential threat and won't let me run it. How do I bypass this?**
+
+Click on "More info" and then on "Run anyway."
+
+**macOS says that the app is corrupted and can't be opened. How can I get around this?**
+
+Run the following command to install the app:
+
+```bash
+sudo xattr -rd com.apple.quarantine "/Users/(your username)/Downloads/interva_1.2.0_aarch64.dmg"
+```
+
+Replace `(your username)` with your actual macOS username.
+
+---
+
+### What's the point of this application?
+
+The Pomodoro Technique is a time management method that uses a timer to break work into focused intervals (typically 25 minutes) separated by short breaks. Interva takes this concept and adds:
+
+## Cozy design:
+
+- Distraction-Free Interface: A clean, minimal design that stays out of your way
+- Customization: Adjust focus time, break durations, and number of rounds to match your workflow
+- Visual Comfort: Choose from 35+ beautiful themes to match your setup or mood
+- Audio Cues: Gentle sound effects to signal transitions without being disruptive
+
+## Smart Features:
+
+- Auto-start next sessions (configurable)
+- Optional ticking sound for ambient focus
+- Long break rewards after completing your rounds
+- Volume control for all sound effects
+
+---
+
+### Will it be available on Android and iOS?
+
+Not in the near future, and unlikely if the app ends up in the Github repository graveyard.
+
+--- 
+
+### Will it be available on app stores?
+
+No. It costs money. I don't have dabloons to spare. (although it might happen if you donate on my Ko-Fi :D)
+
+--- 
+
 ## Support
 
 For support, you can find my email on [my Github profile](https://github.com/chaosweasl).
 
+---
+
 ## Feedback
 
 You can leave your feedback on [this Google Form](https://docs.google.com/forms/d/e/1FAIpQLSdaQUubBlTNOk8SC8pRLVXGEYHR99KCq-QJsast49FR15m26g/viewform)
+
+---
 
 ## ☕ Supporting my work
 
@@ -130,16 +168,18 @@ With no prior experience in CI/CD, I spent around 5–6 hours learning and confi
 
 Another challenge I faced was configuring the app to support specific OS-level behaviors, such as keeping the window always on top and building a custom draggable navbar instead of using the default title bar.
 
-I also considered adding support for Linux and macOS, but those platforms require additional setup that I haven't tackled yet. In the case of macOS, I'd need a developer certificate from Apple and access to a macOS environment—which typically means owning a Mac or renting a macOS cloud instance, both of which aren't feasible for me right now.
-
 I also managed to make a landing page for my app. I built it with Next.js and Vercel, and you can visit it [here](https://interva-chaosweasl.vercel.app/). Developing the landing page was surprisingly a lot easier than I expected initially. I also learned how to add stuff like robots.txt, sitemap.xml and metadata to fully optimise SEO.
 
 Overall, this project helped me push past a major fear: building and deploying a real-world app. Shipping something functional and available to users gave me a huge confidence boost.
+
+---
 
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
 ### Vercel, Next.js, ShadCN (for the landing page)
+
+---
 
 ## License
 
