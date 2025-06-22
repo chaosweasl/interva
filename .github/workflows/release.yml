@@ -46,9 +46,7 @@ jobs:
       matrix:
         include:
           - platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
-          - platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
+            args: "--target universal-apple-darwin"
           - platform: "ubuntu-24.04"
             args: ""
           - platform: "windows-latest"
@@ -63,12 +61,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Add Rust target (macOS only)
-        if: matrix.platform == 'macos-latest'
-        run: rustup target add ${{ matrix.args == '--target x86_64-apple-darwin' && 'x86_64-apple-darwin' || 'aarch64-apple-darwin' }}
-
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
 
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-24.04'
