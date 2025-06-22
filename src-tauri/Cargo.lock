@@ -1783,7 +1783,7 @@ dependencies = [
 
 [[package]]
 name = "interva"
-version = "1.0.1"
+version = "1.2.0"
 dependencies = [
  "serde",
  "serde_json",
