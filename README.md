@@ -77,23 +77,33 @@ winget install chaosweasl.interva
 
 ## FAQ
 
-**Is it a virus?**
+---
+
+### Is it a virus? 
 
 No. The app is fully open-source. You can check the code yourself if you don't take my word for it.
 
-**Why does my computer flag the app as a virus then?**
+---
+
+### Why does my computer flag the app as a virus then?
 
 I need a code signing certificate for Windows and macOS, which costs money. :(
 
-**My browser flags the `.msi` file as a virus and doesn't let me download it, what should I do?**
+---
+
+### My browser flags the `.msi` file as a virus and doesn't let me download it, what should I do?
 
 Try disabling some security settings in your browser (e.g., Safe Browsing in Chrome). If that doesn't work, you can also try turning off real-time protection in your antivirus temporarily.
 
-**Windows Defender warns me about the app being a potential threat and won't let me run it. How do I bypass this?**
+---
+
+### Windows Defender warns me about the app being a potential threat and won't let me run it. How do I bypass this?
 
 Click on "More info" and then on "Run anyway."
 
-**macOS says that the app is corrupted and can't be opened. How can I get around this?**
+---
+
+### macOS says that the app is corrupted and can't be opened. How can I get around this?
 
 Run the following command to install the app:
 
