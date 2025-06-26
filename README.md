@@ -34,7 +34,8 @@ You can download the latest version of Interva from the [GitHub Releases page](h
 
 ### macOS
 
-- `.dmg` disk image
+- `.dmg` disk image (recommended)
+- alternatively, you can also download the `.app.tar.gz` installer and extract it.
 
 ### Linux
 
