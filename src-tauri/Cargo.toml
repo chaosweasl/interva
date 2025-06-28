@@ -3,7 +3,7 @@ name = "interva"
 version = "1.2.1"
 description = "An app with a pomodoro timer designed to help students focus on their work"
 authors = ["chaosweasl"]
-edition = "2021"
+edition = "2025"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
