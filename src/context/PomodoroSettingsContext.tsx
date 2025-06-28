@@ -4,6 +4,7 @@ import {
   useState,
   ReactNode,
   useEffect,
+  useRef,
 } from "react";
 import { enable, isEnabled, disable } from "@tauri-apps/plugin-autostart";
 
@@ -84,29 +85,76 @@ export const PomodoroSettingsProvider = ({
     }
   }, []); // Only run on mount
 
-  // Save timer state to localStorage when changed
+  // Debounce and batch localStorage writes for settings
+  const settingsDebounceRef = useRef<number | null>(null);
+  const settingsStateRef = useRef({
+    focusTime,
+    breakTime,
+    longBreakTime,
+    rounds,
+    autoStart,
+    theme,
+    tickingEnabled,
+  });
+
   useEffect(() => {
-    localStorage.setItem("focusTime", String(focusTime));
-  }, [focusTime]);
+    settingsStateRef.current = {
+      focusTime,
+      breakTime,
+      longBreakTime,
+      rounds,
+      autoStart,
+      theme,
+      tickingEnabled,
+    };
+    if (settingsDebounceRef.current) {
+      clearTimeout(settingsDebounceRef.current);
+    }
+    settingsDebounceRef.current = window.setTimeout(() => {
+      localStorage.setItem(
+        "focusTime",
+        String(settingsStateRef.current.focusTime)
+      );
+      localStorage.setItem(
+        "breakTime",
+        String(settingsStateRef.current.breakTime)
+      );
+      localStorage.setItem(
+        "longBreakTime",
+        String(settingsStateRef.current.longBreakTime)
+      );
+      localStorage.setItem("rounds", String(settingsStateRef.current.rounds));
+      localStorage.setItem(
+        "autoStart",
+        JSON.stringify(settingsStateRef.current.autoStart)
+      );
+      localStorage.setItem("theme", settingsStateRef.current.theme);
+      localStorage.setItem(
+        "tickingEnabled",
+        JSON.stringify(settingsStateRef.current.tickingEnabled)
+      );
+      document.documentElement.setAttribute(
+        "data-theme",
+        settingsStateRef.current.theme
+      );
+    }, 500);
+  }, [
+    focusTime,
+    breakTime,
+    longBreakTime,
+    rounds,
+    autoStart,
+    theme,
+    tickingEnabled,
+  ]);
+
   useEffect(() => {
-    localStorage.setItem("breakTime", String(breakTime));
-  }, [breakTime]);
-  useEffect(() => {
-    localStorage.setItem("longBreakTime", String(longBreakTime));
-  }, [longBreakTime]);
-  useEffect(() => {
-    localStorage.setItem("rounds", String(rounds));
-  }, [rounds]);
-  useEffect(() => {
-    localStorage.setItem("autoStart", JSON.stringify(autoStart));
-  }, [autoStart]);
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
-  useEffect(() => {
-    localStorage.setItem("tickingEnabled", JSON.stringify(tickingEnabled));
-  }, [tickingEnabled]);
+    return () => {
+      if (settingsDebounceRef.current) {
+        clearTimeout(settingsDebounceRef.current);
+      }
+    };
+  }, []);
 
   // Check initial autostart status on mount
   useEffect(() => {

@@ -40,17 +40,14 @@ export function useInterva() {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [timeLeft, setTimeLeft] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.TIME_LEFT);
-    console.log("Loading timeLeft:", saved);
     return saved ? parseInt(saved, 10) : focusTime * 60;
   });
   const [currentRound, setCurrentRound] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.CURRENT_ROUND);
-    console.log("Loading currentRound:", saved);
     return saved ? parseInt(saved, 10) : 1;
   });
   const [timerState, setTimerState] = useState<TimerState>(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.TIMER_STATE) as TimerState;
-    console.log("Loading timerState:", saved);
     return Object.values(TimerState).includes(saved) ? saved : TimerState.FOCUS;
   });
 
@@ -110,24 +107,50 @@ export function useInterva() {
     };
   }, [isPlaying]);
 
-  // Persist state to localStorage
-  useEffect(() => {
-    console.log("Saving state:", {
-      timeLeft,
-      currentRound,
-      timerState,
-    });
+  // Debounce localStorage writes for timer state
+  const localStorageDebounceRef = useRef<number | null>(null);
+  const localStorageStateRef = useRef({
+    timeLeft,
+    currentRound,
+    timerState,
+  });
 
-    localStorage.setItem(STORAGE_KEYS.TIME_LEFT, String(timeLeft));
-    localStorage.setItem(STORAGE_KEYS.CURRENT_ROUND, String(currentRound));
-    localStorage.setItem(STORAGE_KEYS.TIMER_STATE, timerState);
+  // Update ref on state change
+  useEffect(() => {
+    localStorageStateRef.current = { timeLeft, currentRound, timerState };
+    if (localStorageDebounceRef.current) {
+      clearTimeout(localStorageDebounceRef.current);
+    }
+    // Debounce writes to 500ms after last change
+    localStorageDebounceRef.current = window.setTimeout(() => {
+      localStorage.setItem(
+        STORAGE_KEYS.TIME_LEFT,
+        String(localStorageStateRef.current.timeLeft)
+      );
+      localStorage.setItem(
+        STORAGE_KEYS.CURRENT_ROUND,
+        String(localStorageStateRef.current.currentRound)
+      );
+      localStorage.setItem(
+        STORAGE_KEYS.TIMER_STATE,
+        localStorageStateRef.current.timerState
+      );
+    }, 500);
   }, [timeLeft, currentRound, timerState]);
+
+  // Clean up debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (localStorageDebounceRef.current) {
+        clearTimeout(localStorageDebounceRef.current);
+      }
+    };
+  }, []);
 
   // Reset timer when settings change
   useEffect(() => {
     const hasSavedState = localStorage.getItem(STORAGE_KEYS.TIME_LEFT);
     if (!hasSavedState) {
-      console.log("No saved state found, initializing with default settings");
       setTimeLeft(focusTime * 60);
       setCurrentRound(1);
       setTimerState(TimerState.FOCUS);
@@ -218,7 +241,6 @@ export function useInterva() {
   }
 
   function handleReset() {
-    console.log("Resetting timer and clearing storage");
     setIsPlaying(false);
     setCurrentRound(1);
     setTimerState(TimerState.FOCUS);

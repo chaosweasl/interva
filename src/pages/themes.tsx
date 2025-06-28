@@ -59,6 +59,7 @@ export default function Themes() {
               <div className="w-full h-full bg-base-200 flex items-center justify-center rounded mb-3">
                 {/* Replace src with your own theme preview images, e.g. /themes/dark.png */}
                 <img
+                  loading="lazy"
                   src={`/themes/${t}.png`}
                   alt={`${t} theme preview`}
                   className="object-cover w-full h-full"
