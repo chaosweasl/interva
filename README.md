@@ -5,6 +5,8 @@ I've built this project as a modern, customizable Pomodoro timer appli
 Originally, this project was only going to be added to my portfolio for recruiters. However, after finishing the app, I decided to keep it open source and available for anyone to download.
 Whether you're a student who has trouble focusing on their work, a recruiter who's looking for hirees or you just want to test this app out and contribute to it, this is the place for you :)
 
+Disclaimer: Due to licensing issues and macOS's hatred for non-Apple developers, the auto-updater will NOT work on macOS. You will have to manually redownload each release.
+
 [https://interva-chaosweasl.vercel.app/](https://interva-chaosweasl.vercel.app/)
 
 ## Authors
