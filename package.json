@@ -1,13 +1,15 @@
 {
   "name": "interva",
   "private": true,
-  "version": "1.2.1",
+  "version": "1.2.2-testRelease",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "release": "node scripts/release.js",
+    "set-version": "node scripts/set-version.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
