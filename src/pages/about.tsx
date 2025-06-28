@@ -88,6 +88,9 @@ export default function about() {
               GitHub Repository
             </button>
           </div>
+          <div className="w-full text-center items-center justify-center text-s text-base-content/50 select-none pointer-events-none">
+            Interva v1.2.1
+          </div>
         </div>
 
         {/* Bottom decoration */}

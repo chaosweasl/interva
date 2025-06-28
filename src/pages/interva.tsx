@@ -173,9 +173,6 @@ export default function interva() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-base-content/60 select-none pointer-events-none">
-        v1.2.1
-      </div>
     </div>
   );
 }
