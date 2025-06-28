@@ -2,6 +2,7 @@
 // Usage: node scripts/release.js 1.2.2
 
 import { execSync } from "child_process";
+import { exec } from "child_process";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -20,22 +21,37 @@ function run(cmd) {
   execSync(cmd, { stdio: "inherit" });
 }
 
-// 1. Run the version update script
-run(`node "${path.resolve(__dirname, "set-version.js")}" ${newVersion}`);
+async function main() {
+  // 1. Run the version update script and await completion
+  await new Promise((resolve, reject) => {
+    const child = exec(
+      `node "${path.resolve(__dirname, "set-version.js")}" ${newVersion}`
+    );
+    child.stdout?.pipe(process.stdout);
+    child.stderr?.pipe(process.stderr);
+    child.on("exit", (code) =>
+      code === 0
+        ? resolve()
+        : reject(new Error(`set-version.js exited with code ${code}`))
+    );
+  });
 
-// 2. Stage all changes
-run("git add -A");
+  // 2. Stage all changes
+  run("git add -A");
 
-// 3. Commit
-run(`git commit -m "release: v${newVersion}"`);
+  // 3. Commit
+  run(`git commit -m "release: v${newVersion}"`);
 
-// 4. Push to all remotes
-run("git push --all");
+  // 4. Push to all remotes
+  run("git push --all");
 
-// 5. Tag
-run(`git tag v${newVersion}`);
+  // 5. Tag
+  run(`git tag v${newVersion}`);
 
-// 6. Push tag to origin
-run(`git push origin v${newVersion}`);
+  // 6. Push tag to origin
+  run(`git push origin v${newVersion}`);
 
-console.log(`Release v${newVersion} pushed and tagged!`);
+  console.log(`Release v${newVersion} pushed and tagged!`);
+}
+
+main();

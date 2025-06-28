@@ -1,6 +1,6 @@
 [package]
 name = "interva"
-version = "1.2.2-testRelease"
+version = "1.2.3test-release"
 description = "An app with a pomodoro timer designed to help students focus on their work"
 authors = ["you"]
 edition = "2021"

@@ -1,7 +1,7 @@
 {
   "name": "interva",
   "private": true,
-  "version": "1.2.2-testRelease",
+  "version": "1.2.3test-release",
   "type": "module",
   "scripts": {
     "dev": "vite",
