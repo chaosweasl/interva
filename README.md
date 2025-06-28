@@ -8,7 +8,7 @@ Whether you're a student who has trouble focusing on their work, a r
 ## Disclaimer: Due to licensing issues and macOS's hatred for non-Apple developers, the auto-updater will NOT work on macOS. You will have to manually redownload each release.
 ## Disclaimer: Interva is still in early development! Expect to see bugs and potential performance issues.
 
-[https://interva-chaosweasl.vercel.app/](https://interva-chaosweasl.vercel.app/)
+# [https://interva-chaosweasl.vercel.app/](https://interva-chaosweasl.vercel.app/)
 
 ## Authors
 
