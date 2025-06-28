@@ -89,7 +89,7 @@ export default function about() {
             </button>
           </div>
           <div className="w-full text-center items-center justify-center text-s text-base-content/50 select-none pointer-events-none">
-            Interva v1.2.1
+            interva v1.2.1
           </div>
         </div>
 
