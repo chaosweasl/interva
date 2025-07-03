@@ -9,7 +9,6 @@ Whether you're a student who has trouble focusing on their work, a r
 
 ### Disclaimer: Due to licensing issues and macOS's hatred for non-Apple developers, the auto-updater will NOT work on macOS. You will have to manually redownload each release.
 
-
 ### Disclaimer: Interva is still in early development! Expect to see bugs and potential performance issues.
 
 ---
@@ -21,6 +20,20 @@ Whether you're a student who has trouble focusing on their work, a r
 ## Authors
 
 - [@chaosweasl](https://github.com/chaosweasl)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from everyone!  
+If you'd like to help improve Interva, please read our [CONTRIBUTING.md](CONTRIBUTING.md) for a step-by-step guide on installing, running, and making changes to the app.
+
+- Fork, clone, and install dependencies with `pnpm install`
+- Run the app locally with `pnpm dev` (web) or `pnpm tauri dev` (desktop)
+- See [`scripts/`](scripts/) for release/versioning automation
+- Open a pull request when you're ready!
+
+> **Note:** Only maintainers can run the release script and publish new releases. Contributors should open a pull request and request a release if needed.
 
 ---
 
@@ -93,7 +106,7 @@ winget install chaosweasl.interva
 
 ---
 
-### Is it a virus? 
+### Is it a virus?
 
 No. The app is fully open-source. You can check the code yourself if you don't take my word for it.
 
@@ -153,13 +166,13 @@ The Pomodoro Technique is a time management method that uses a timer to break wo
 
 Not in the near future, and unlikely if the app ends up in the Github repository graveyard.
 
---- 
+---
 
 ### Will it be available on app stores?
 
 No. It costs money. I don't have dabloons to spare. (although it might happen if you donate on my Ko-Fi :D)
 
---- 
+---
 
 ## Support
 
@@ -175,7 +188,7 @@ You can leave your feedback on [this Google Form](https://docs.google.com/forms/
 
 ## ☕ Supporting my work
 
-Projects like these take a lot of time to make, and I don't make anything from them. 
+Projects like these take a lot of time to make, and I don't make anything from them.
 I have a big dream of creating my own startup to help students study more efficiently - your contribution would be heart-melting to me. ❤️
 
 [Please support me on Ko-Fi!](https://ko-fi.com/chaosweasl)
@@ -201,6 +214,7 @@ Overall, this project helped me push past a major fear: building and deploying a
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
+
 ### Vercel, Next.js, ShadCN (for the landing page)
 
 ---
