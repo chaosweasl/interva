@@ -1,0 +1,15 @@
+name: Prevent Tag Pushes
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  prevent-tag-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block tag push
+        run: |
+          echo "Direct tag pushes are not allowed. Please create tags via releases or ask the repository maintainer."
+          exit 1
