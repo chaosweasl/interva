@@ -195,22 +195,6 @@ I have a big dream of creating my own startup to help students study more effici
 
 ---
 
-# For Recruiters
-
-## Lessons Learned
-
-One of the biggest challenges I faced while building this app was setting up workflows to streamline the deployment process. I wanted to avoid manually adding assets for each new build, so implementing GitHub Actions became essential—especially to ensure the Tauri auto-updater worked properly.
-
-With no prior experience in CI/CD, I spent around 5–6 hours learning and configuring these workflows. While they’re not perfect, I’m proud of getting them up and running. This experience gave me a solid starting point and much more confidence in creating automation pipelines for future projects. I’ll definitely be applying these skills again.
-
-Another challenge I faced was configuring the app to support specific OS-level behaviors, such as keeping the window always on top and building a custom draggable navbar instead of using the default title bar.
-
-I also managed to make a landing page for my app. I built it with Next.js and Vercel, and you can visit it [here](https://interva-chaosweasl.vercel.app/). Developing the landing page was surprisingly a lot easier than I expected initially. I also learned how to add stuff like robots.txt, sitemap.xml and metadata to fully optimise SEO.
-
-Overall, this project helped me push past a major fear: building and deploying a real-world app. Shipping something functional and available to users gave me a huge confidence boost.
-
----
-
 ## Tech Stack
 
 ### React, React Router, Tailwind CSS, DaisyUI, Lucide React, Vite, TypeScript, Tauri
