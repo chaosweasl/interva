@@ -77,6 +77,8 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   node scripts/release.js <new-version>
   ```
 
+> **Note:** Only maintainers can run the release script and publish new releases. Contributors should open a pull request and request a release if needed.
+
 ---
 
 ## Guidelines
