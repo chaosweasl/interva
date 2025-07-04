@@ -5,6 +5,9 @@ on:
     tags:
       - "*"
 
+permissions:
+  contents: read
+
 jobs:
   prevent-tag-push:
     runs-on: ubuntu-latest
