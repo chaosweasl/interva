@@ -14,7 +14,15 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   cd interva
   ```
 
-### 2. Install Dependencies
+### 2. Submodules
+
+This repository uses git submodules. After cloning, run:
+
+```bash
+git submodule update --init --recursive
+```
+
+### 3. Install Dependencies
 
 - Make sure you have [Node.js](https://nodejs.org/), [pnpm](https://pnpm.io/), and (optionally) [Rust](https://www.rust-lang.org/tools/install) for Tauri desktop builds.
 - Install dependencies:
@@ -22,7 +30,7 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   pnpm install
   ```
 
-### 3. Run the App (Web)
+### 4. Run the App (Web)
 
 - Start the development server:
   ```bash
@@ -30,7 +38,7 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   ```
 - Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 4. Run the Desktop App (Tauri)
+### 5. Run the Desktop App (Tauri)
 
 - Make sure you have Rust and Tauri prerequisites installed ([Tauri setup guide](https://tauri.app/v1/guides/getting-started/prerequisites/)).
 - Start the Tauri app:
@@ -38,18 +46,18 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   pnpm tauri dev
   ```
 
-### 5. Make Changes
+### 6. Make Changes
 
 - Edit files in `src/` for the frontend.
 - Edit files in `src-tauri/` for desktop-specific logic.
 - Use the [`scripts/`](scripts/) folder for release/versioning automation (see `release.js` and `set-version.js`).
 
-### 6. Test Your Changes
+### 7. Test Your Changes
 
 - Make sure the app runs and your changes work as expected.
 - Add or update tests if needed.
 
-### 7. Commit & Push
+### 8. Commit & Push
 
 - Create a new branch:
   ```bash
@@ -62,7 +70,7 @@ Your help is welcome, whether you want to fix bugs, add features, improve docume
   git push origin your-feature-name
   ```
 
-### 8. Open a Pull Request
+### 9. Open a Pull Request
 
 - Go to your fork on GitHub and click "Compare & pull request".
 - Fill in the PR template and submit.
